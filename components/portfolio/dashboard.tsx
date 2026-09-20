@@ -14,11 +14,11 @@ import {
   UserRound,
 } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { projects } from "@/data/projects";
 import { goals } from "@/data/goals";
 import { GithubActivity, GithubProfileWindow } from "@/components/github/github-activity";
 import { TechnologyGraph } from "@/components/portfolio/technology-graph";
 import { HackathonTimeline } from "@/components/hackathons/hackathon-timeline";
+import { ProjectExplorer } from "@/components/projects/project-explorer";
 
 type Section = "overview" | "about" | "projects" | "hackathons" | "github" | "goals" | "contact";
 
@@ -72,8 +72,8 @@ function About() {
   return <div className="dash-section"><div className="content-heading"><span>01 / PROFILE</span><h2>About</h2><p>A growing engineering toolkit, guided by curiosity about how modern software works end-to-end.</p></div><div className="about-md-window"><div className="os-window-bar"><span>ABOUT_ME.md</span><div><i /><i /><i /></div></div><div className="about-md-content"><p>Developer focused on understanding how modern software systems work end-to-end.</p><small>CURRENTLY EXPLORING</small><ul><li>Java + DSA</li><li>Full-Stack Engineering</li><li>Cloud / DevOps</li><li>AI Engineering</li><li>AI Automation</li></ul><p>I enjoy turning ideas into working products and understanding the systems underneath them.</p></div></div><TechnologyGraph /><div className="about-grid"><article className="dash-card"><small>BASED IN</small><h3>India · IST</h3><p>Building consistently, learning publicly, and collaborating across time zones.</p></article></div></div>;
 }
 
-function Projects() {
-  return <div className="dash-section"><div className="content-heading"><span>02 / WORK</span><h2>Projects</h2><p>Selected products and experiments. Replace these examples with your real work when ready.</p></div><div className="dash-projects">{projects.map((project, index) => <a key={project.slug} href={project.href} target="_blank" rel="noreferrer" className="dash-project"><div><span>0{index + 1}</span><ArrowUpRight size={18} /></div><small>{project.status}</small><h3>{project.title}</h3><p>{project.description}</p><ul>{project.stack.map(item => <li key={item}>{item}</li>)}</ul></a>)}</div></div>;
+function Projects({ onNavigate }: { onNavigate: (section: Section) => void }) {
+  return <div className="dash-section"><div className="content-heading"><span>02 / WORKSPACE</span><h2>Projects</h2><p>Open a project file to inspect its focus, stack, and next step.</p></div><ProjectExplorer onCaseStudy={() => onNavigate("hackathons")} /></div>;
 }
 
 function Hackathons() {
@@ -96,7 +96,7 @@ export function PortfolioDashboard() {
   const [active, setActive] = useState<Section>("overview");
   const reduceMotion = useReducedMotion();
   const panels: Record<Section, React.ReactNode> = {
-    overview: <Overview onNavigate={setActive} />, about: <About />, projects: <Projects />, hackathons: <Hackathons />, github: <GithubPanel />, goals: <Goals />, contact: <Contact />,
+    overview: <Overview onNavigate={setActive} />, about: <About />, projects: <Projects onNavigate={setActive} />, hackathons: <Hackathons />, github: <GithubPanel />, goals: <Goals />, contact: <Contact />,
   };
   return (
     <main className="portfolio-frame">
