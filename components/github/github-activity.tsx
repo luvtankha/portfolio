@@ -10,10 +10,10 @@ type Profile = { login: string; name: string | null; avatar_url: string; html_ur
 type GithubData = { profile: Profile; repos: Repo[] };
 
 const fallback: GithubData = {
-  profile: { login: "username", name: "Your Name", avatar_url: "", html_url: "https://github.com/", bio: "Full-stack developer building practical software and learning AI engineering.", public_repos: 18, followers: 24 },
+  profile: { login: "luvtankha", name: "Luv Tankha", avatar_url: "", html_url: "https://github.com/luvtankha", bio: "Full-stack developer building practical software and progressing toward AI engineering.", public_repos: 2, followers: 0 },
   repos: [
-    { id: 1, name: "HELIOS", html_url: "https://github.com/", description: "Automation and AI experiments.", language: "TypeScript", stargazers_count: 12, forks_count: 2 },
-    { id: 2, name: "portfolio", html_url: "https://github.com/", description: "Personal developer dashboard.", language: "Next.js", stargazers_count: 6, forks_count: 1 },
+    { id: 1, name: "HELIOS", html_url: "https://github.com/luvtankha/HELIOS", description: "Healthcare Enabled Language & Intelligent Observation System.", language: "TypeScript", stargazers_count: 0, forks_count: 0 },
+    { id: 2, name: "portfolio", html_url: "https://github.com/luvtankha/portfolio", description: "Interactive Obsidian-inspired developer portfolio.", language: "TypeScript", stargazers_count: 0, forks_count: 0 },
   ],
 };
 
