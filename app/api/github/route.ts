@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const headers = { Accept: "application/vnd.github+json", "User-Agent": "portfolio-site" };
 
 export async function GET(request: NextRequest) {
-  const username = request.nextUrl.searchParams.get("username") || process.env.GITHUB_USERNAME || "octocat";
+  const username = request.nextUrl.searchParams.get("username") || process.env.GITHUB_USERNAME || "luvtankha";
   if (!/^[a-zA-Z0-9-]{1,39}$/.test(username)) return NextResponse.json({ error: "Invalid username" }, { status: 400 });
 
   const [profileResponse, reposResponse] = await Promise.all([
