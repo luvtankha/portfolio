@@ -20,8 +20,9 @@ import { HackathonTimeline } from "@/components/hackathons/hackathon-timeline";
 import { ProjectExplorer } from "@/components/projects/project-explorer";
 import { Roadmap } from "@/components/goals/roadmap";
 import { CurrentlyLearningWidget } from "@/components/goals/currently-learning-widget";
+import { CommandPalette, type PortfolioSection } from "@/components/portfolio/command-palette";
 
-type Section = "overview" | "about" | "projects" | "hackathons" | "github" | "goals" | "contact";
+type Section = PortfolioSection;
 
 const navigation: { id: Section; label: string; icon: typeof Compass }[] = [
   { id: "overview", label: "Overview", icon: Compass },
@@ -101,7 +102,7 @@ export function PortfolioDashboard() {
   };
   return (
     <main className="portfolio-frame">
-      <header className="portfolio-topbar"><div><span className="portfolio-glyph">P</span><strong>Portfolio</strong></div><p><span className="status-dot" /> Online</p></header>
+      <header className="portfolio-topbar"><div><span className="portfolio-glyph">P</span><strong>Portfolio</strong></div><CommandPalette onNavigate={setActive} /><p><span className="status-dot" /> Online</p></header>
       <div className="portfolio-body">
         <aside className="portfolio-sidebar">
           <nav aria-label="Portfolio sections">{navigation.map(item => { const Icon = item.icon; return <button key={item.id} className={active === item.id ? "active" : ""} onClick={() => setActive(item.id)}><Icon size={16} /><span>{item.label}</span><i /></button>; })}</nav>
