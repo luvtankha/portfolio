@@ -6,8 +6,8 @@
     "node": ">=22.13.0 <23"
   },
   "scripts": {
-    "dev": "vite dev --port 5173",
-    "build": "vite build",
+    "dev": "vinext dev --port 5173",
+    "build": "vinext build",
     "start": "node .output/server/index.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
