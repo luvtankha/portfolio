@@ -4,6 +4,8 @@
 
 Interactive Obsidian-inspired portfolio for **Luv Tankha**, a Full-Stack Developer and aspiring AI Engineer.
 
+**Live site:** https://luvtankha-portfolio.onrender.com
+
 ## Profile
 
 - B.Tech Data Science, 3rd Year — MUIT
