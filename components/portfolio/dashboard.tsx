@@ -64,21 +64,22 @@ function Overview({ onNavigate, draggable = true }: { onNavigate: (section: Sect
       <section className="dashboard-hero">
         <div className="hero-system-label"><span>PROFILE / OVERVIEW</span><p><i /> BUILDING</p></div>
         <div className="dashboard-hero-copy">
-          <h1>YOUR NAME</h1>
-          <p className="dashboard-role">Full-Stack Developer</p>
-          <p className="dashboard-direction">Building toward <span>AI Engineering</span></p>
-          <p className="dashboard-statement">I build practical systems combining software engineering, automation and AI.</p>
+          <h1>FULL-STACK<br />DEVELOPER</h1>
+          <p className="dashboard-direction">→ <span>AI ENGINEER</span></p>
+          <p className="dashboard-statement">Building software, AI systems and automation.</p>
           <div className="dash-actions"><button onClick={() => onNavigate("projects")}>Explore Work <ArrowUpRight size={16} /></button><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a><a href="mailto:hello@example.com?subject=Resume request">Resume</a></div>
         </div>
         <div className="hero-console" aria-hidden="true"><div><span>system.profile</span><b>READY</b></div><pre><code><i>role</i>      full_stack_developer{"\n"}<i>location</i>  india / ist{"\n"}<i>target</i>    ai_engineering{"\n"}<i>mode</i>      building</code></pre></div>
       </section>
-      <div className="dashboard-metrics">
-        <button onClick={() => onNavigate("projects")}><span>Projects</span><strong>05</strong><i>Selected work <ArrowUpRight size={13} /></i></button>
-        <button onClick={() => onNavigate("hackathons")}><span>Hackathons</span><strong>02</strong><i>Build sprints <ArrowUpRight size={13} /></i></button>
-        <button onClick={() => onNavigate("goals")}><span>Current Goal</span><strong>AI Engineer</strong><i>View roadmap <ArrowUpRight size={13} /></i></button>
-      </div>
-      <div className="social-window-grid">
+      <div className="overview-utility-grid">
         <GithubProfileWindow compact draggable={draggable} />
+        <CurrentlyLearningWidget />
+      </div>
+      <button className="featured-helios-card" type="button" onClick={() => onNavigate("hackathons")}>
+        <div><span>FEATURED HACKATHON PROJECT</span><h2>HELIOS</h2><p>Healthcare Enabled Language &amp; Intelligent Observation System</p></div><i>View Case Study <ArrowUpRight size={16} /></i>
+      </button>
+      <button className="overview-roadmap-preview" type="button" onClick={() => onNavigate("goals")}><span>ROADMAP</span><strong>Full Stack <i>→</i> AI Engineering</strong><small>Open career direction <ArrowUpRight size={14} /></small></button>
+      <div className="social-window-grid overview-linkedin-window">
         <motion.section className="profile-window linkedin-profile-window" drag={draggable && !reduceMotion ? "x" : false} dragControls={linkedInDragControls} dragListener={false} dragConstraints={{ left: -10, right: 10 }} dragElastic={.08} dragSnapToOrigin whileHover={reduceMotion ? undefined : { y: -3 }}>
           <div className={`os-window-bar ${draggable ? "draggable-window-bar" : ""}`} onPointerDown={(event) => draggable && !reduceMotion && linkedInDragControls.start(event)}><span>linkedin.com/in/username</span><div><i /><i /><i /></div></div>
           <div className="profile-window-body">
@@ -123,11 +124,11 @@ function MobilePortfolio() {
   return (
     <main className="mobile-portfolio">
       <header className="mobile-topbar">
-        <div className="mobile-brand-row"><div><span className="portfolio-glyph">P</span><strong>Portfolio</strong></div><CommandPalette onNavigate={scrollToSection} /><p><span className="status-dot" /> Online</p></div>
+        <div className="mobile-brand-row"><div><span className="portfolio-glyph">P</span><strong>YOUR NAME</strong></div><CommandPalette onNavigate={scrollToSection} /><p><span className="status-dot" /> AVAILABLE</p></div>
         <nav aria-label="Portfolio sections">{navigation.map(item => <button type="button" key={item.id} onClick={() => scrollToSection(item.id)}>{item.label}</button>)}</nav>
       </header>
       <div className="mobile-content">
-        <section id="mobile-overview" className="mobile-page-block"><Overview onNavigate={scrollToSection} draggable={false} /><div className="mobile-learning-wrap"><CurrentlyLearningWidget /></div></section>
+        <section id="mobile-overview" className="mobile-page-block"><Overview onNavigate={scrollToSection} draggable={false} /></section>
         <DeferredMobileSection id="mobile-about"><About /></DeferredMobileSection>
         <DeferredMobileSection id="mobile-projects"><Projects onNavigate={scrollToSection} /></DeferredMobileSection>
         <DeferredMobileSection id="mobile-hackathons"><Hackathons /></DeferredMobileSection>
@@ -157,11 +158,11 @@ export function PortfolioDashboard() {
   if (isMobile) return <MobilePortfolio />;
   return (
     <main className="portfolio-frame">
-      <header className="portfolio-topbar"><div><span className="portfolio-glyph">P</span><strong>Portfolio</strong></div><CommandPalette onNavigate={setActive} /><p><span className="status-dot" /> Online</p></header>
+      <header className="portfolio-topbar"><div><span className="portfolio-glyph">P</span><strong>YOUR NAME</strong></div><CommandPalette onNavigate={setActive} /><p><span className="status-dot" /> AVAILABLE</p></header>
       <div className="portfolio-body">
         <aside className="portfolio-sidebar">
           <nav aria-label="Portfolio sections">{navigation.map(item => { const Icon = item.icon; return <button key={item.id} className={active === item.id ? "active" : ""} onClick={() => setActive(item.id)}><Icon size={16} /><span>{item.label}</span><i /></button>; })}</nav>
-          <div className="sidebar-bottom"><CurrentlyLearningWidget /><div className="sidebar-foot"><span>LOCAL TIME</span><strong>IST · UTC+5:30</strong></div></div>
+          <div className="sidebar-bottom">{active !== "overview" && <CurrentlyLearningWidget />}<div className="sidebar-foot"><span>LOCAL TIME</span><strong>IST · UTC+5:30</strong></div></div>
         </aside>
         <section className="portfolio-content" aria-live="polite">
           <AnimatePresence mode="wait"><motion.div key={active} initial={reduceMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? undefined : { opacity: 0, y: -5 }} transition={{ duration: .22 }}>{panels[active]}</motion.div></AnimatePresence>

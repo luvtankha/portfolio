@@ -648,6 +648,21 @@ body { min-height: 100vh; overflow-x: hidden; }
 .dashboard-metrics button:nth-child(3) > strong { color: #a78bfa; font-size: 25px; }
 .dashboard-metrics button > i { display: flex; align-items: center; gap: 5px; margin-top: auto; color: #71717a; font: 10px var(--font-mono, monospace); font-style: normal; }
 .social-window-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; margin-top: 14px; }
+.overview-utility-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(245px, .85fr); gap: 14px; margin-top: 14px; }
+.overview-utility-grid .currently-learning-widget { height: 100%; margin: 0; }
+.featured-helios-card { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 14px; padding: clamp(28px, 4vw, 48px); border: 1px solid #3f315a; border-radius: 14px; color: #f4f4f5; background: radial-gradient(circle at 84% 30%, rgba(139,92,246,.21), transparent 20rem), linear-gradient(115deg, rgba(139,92,246,.12), transparent 45%), #151518; text-align: left; cursor: pointer; transition: .22s ease; }
+.featured-helios-card:hover { border-color: #805fbd; box-shadow: 0 22px 52px rgba(139,92,246,.15); transform: translateY(-3px); }
+.featured-helios-card span, .overview-roadmap-preview > span { display: block; margin-bottom: 13px; color: #a78bfa; font: 10px var(--font-mono, monospace); letter-spacing: .13em; }
+.featured-helios-card h2 { margin: 0 0 10px; font-size: clamp(42px, 7vw, 78px); line-height: .88; letter-spacing: -.07em; }
+.featured-helios-card p { max-width: 500px; margin: 0; color: #a1a1aa; font-size: 14px; line-height: 1.55; }
+.featured-helios-card > i { display: flex; align-items: center; gap: 7px; flex: 0 0 auto; color: #d8caff; font: 11px var(--font-mono, monospace); font-style: normal; }
+.overview-roadmap-preview { width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 15px; margin-top: 14px; padding: 23px 26px; border: 1px solid #292930; border-radius: 13px; color: #f4f4f5; background: #151518; text-align: left; cursor: pointer; transition: .2s ease; }
+.overview-roadmap-preview:hover { border-color: #57436e; background: #19171e; transform: translateY(-2px); }
+.overview-roadmap-preview > span { grid-column: 1 / -1; margin-bottom: 0; }
+.overview-roadmap-preview strong { font-size: clamp(19px, 3vw, 30px); letter-spacing: -.04em; }
+.overview-roadmap-preview strong i { color: #a78bfa; font-style: normal; }
+.overview-roadmap-preview small { display: flex; align-items: center; gap: 5px; color: #71717a; font: 10px var(--font-mono, monospace); }
+.overview-linkedin-window { grid-template-columns: minmax(0, 1fr); width: min(480px, 100%); margin-left: auto; }
 .profile-window { overflow: hidden; border: 1px solid #292930; border-radius: 14px; background: #151518; }
 .profile-window:hover { border-color: #52415f; box-shadow: 0 18px 40px rgba(139,92,246,.09); }
 .os-window-bar { height: 43px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid #292930; color: #a1a1aa; background: #1b1b20; font: 11px var(--font-mono, monospace); }
@@ -709,7 +724,8 @@ body { min-height: 100vh; overflow-x: hidden; }
   .hero-console pre i { color: #a78bfa; font-style: normal; }
 }
 @media (max-width: 900px) {
-  .dashboard-metrics, .social-window-grid { grid-template-columns: 1fr; }
+  .dashboard-metrics, .social-window-grid, .overview-utility-grid { grid-template-columns: 1fr; }
+  .overview-linkedin-window { width: 100%; }
 }
 @media (max-width: 600px) {
   .dashboard-hero-copy { padding: 31px 22px; }
@@ -719,6 +735,9 @@ body { min-height: 100vh; overflow-x: hidden; }
   .dash-actions { gap: 7px; }
   .dash-actions button, .dash-actions a { padding: 10px 11px; font-size: 12px; }
   .dashboard-metrics button { min-height: 120px; }
+  .featured-helios-card { align-items: flex-start; flex-direction: column; padding: 28px 22px; }
+  .overview-roadmap-preview { grid-template-columns: 1fr; padding: 22px; }
+  .overview-roadmap-preview small { margin-top: 5px; }
   .github-stats > div { padding: 9px 6px; gap: 5px; }
   .github-stats svg { display: none; }
   .github-stats small { font-size: 8px; }
