@@ -1,4 +1,13 @@
-import { Trophy } from "lucide-react";
-import { Window } from "@/components/ui/window";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { hackathons } from "@/data/hackathons";
-export default function HackathonsPage() { return <main className="inner-page"><div className="page-heading"><span>FIELD NOTES / FAST BUILDS</span><h1>Hackathons</h1><p>Short timelines, collaborative teams, and ideas tested in public.</p></div><Window title="hackathons.log" eyebrow={`${hackathons.length} ENTRIES`}><div className="hackathon-list">{hackathons.map((item, index) => <article key={item.name}><span className="hack-index">0{index + 1}</span><div className="hack-icon"><Trophy size={20} /></div><div><small>{item.year} · {item.name}</small><h2>{item.project}</h2><p>{item.description}</p></div><strong>{item.result}</strong></article>)}</div></Window></main>; }
+
+export const metadata: Metadata = {
+  title: "Hackathons",
+  description: "Hackathon work by YOUR NAME, including the HELIOS healthcare AI project for Smart India Hackathon.",
+  alternates: { canonical: "/hackathons" },
+};
+
+export default function HackathonsPage() {
+  return <main className="public-page"><p className="public-eyebrow">03 / BUILD SPRINTS</p><h1>Hackathons</h1><p className="public-lede">Fast-moving environments where the problem, system design, and product come together.</p><div className="public-project-list">{hackathons.map(item => <article key={item.project}><p>{item.year} · {item.domain}</p><div><h2>{item.name}</h2><span><strong>{item.project}</strong> — {item.expansion}</span><small>{item.status}</small></div><Link href="/projects/helios">View HELIOS case study →</Link></article>)}</div></main>;
+}
