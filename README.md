@@ -1,5 +1,7 @@
 # Luv Tankha — Developer Portfolio
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/luvtankha/portfolio)
+
 Interactive Obsidian-inspired portfolio for **Luv Tankha**, a Full-Stack Developer and aspiring AI Engineer.
 
 ## Profile
@@ -29,21 +31,42 @@ HELIOS organizes patient-provided information. It does not diagnose, prescribe m
 
 ## Portfolio Stack
 
-- Next.js
+- Next.js API surface via Vinext
 - React
 - TypeScript
 - Tailwind CSS
 - Framer Motion
-- Vinext / Vite
+- Vite
+- Nitro production server
 
-## Development
+## Local Development
 
-Requires Node.js `>=22.13.0`.
+Requires Node.js `22.22.0`.
 
 ```bash
-npm run install:ci
+npm install
 npm run dev
-npm run build
 ```
 
-The production hosting target is Render, with GitHub `main` as the source branch.
+Production build:
+
+```bash
+npm run build
+npm start
+```
+
+## Render Deployment
+
+The repository includes `render.yaml` and is configured for a Render Node Web Service.
+
+Render configuration:
+
+- Branch: `main`
+- Build: `npm install --include=dev && npm run build`
+- Start: `npm start`
+- Health check: `/api/health`
+- Nitro preset: `render-com`
+- Node: `22.22.0`
+- Auto deploy: enabled
+
+Use the **Deploy to Render** button above or create a Blueprint in Render from this repository.
