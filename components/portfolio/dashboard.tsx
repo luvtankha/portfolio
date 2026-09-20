@@ -9,8 +9,7 @@ import {
   GitBranch,
   Goal,
   Mail,
-  MapPin,
-  Sparkles,
+  Network,
   Trophy,
   UserRound,
 } from "lucide-react";
@@ -19,7 +18,7 @@ import { projects } from "@/data/projects";
 import { hackathons } from "@/data/hackathons";
 import { goals } from "@/data/goals";
 import { skillGroups } from "@/data/skills";
-import { GithubActivity } from "@/components/github/github-activity";
+import { GithubActivity, GithubProfileWindow } from "@/components/github/github-activity";
 
 type Section = "overview" | "about" | "projects" | "hackathons" | "github" | "goals" | "contact";
 
@@ -36,25 +35,34 @@ const navigation: { id: Section; label: string; icon: typeof Compass }[] = [
 function Overview({ onNavigate }: { onNavigate: (section: Section) => void }) {
   return (
     <div className="dash-overview">
-      <section className="identity-panel">
-        <div className="identity-copy">
-          <span className="dash-kicker">HELLO, I&apos;M</span>
+      <section className="dashboard-hero">
+        <div className="hero-system-label"><span>PROFILE / OVERVIEW</span><p><i /> BUILDING</p></div>
+        <div className="dashboard-hero-copy">
           <h1>YOUR NAME</h1>
-          <p className="role-line">Full-Stack Developer <span>/</span> Aspiring AI Engineer</p>
-          <p className="location-line"><MapPin size={15} /> India <i /> IST</p>
-          <div className="build-status"><span className="status-dot" /><div><small>CURRENT STATUS</small><strong>Building</strong></div></div>
-          <div className="dash-actions"><button onClick={() => onNavigate("projects")}>View my work <ArrowUpRight size={16} /></button><button className="subtle" onClick={() => onNavigate("contact")}>Contact me</button></div>
+          <p className="dashboard-role">Full-Stack Developer</p>
+          <p className="dashboard-direction">Building toward <span>AI Engineering</span></p>
+          <p className="dashboard-statement">I build practical systems combining software engineering, automation and AI.</p>
+          <div className="dash-actions"><button onClick={() => onNavigate("projects")}>Explore Work <ArrowUpRight size={16} /></button><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a><a href="mailto:hello@example.com?subject=Resume request">Resume</a></div>
         </div>
-        <div className="learning-orbit" aria-label="Current learning path: Full-Stack to AI Engineering">
-          <div className="orbit-ring ring-one" /><div className="orbit-ring ring-two" />
-          <div className="orbit-core"><Sparkles size={23} /><span>AI</span></div>
-          <div className="orbit-label"><small>CURRENTLY LEARNING</small><strong>Full-Stack <span>→</span><br /> AI Engineering</strong></div>
-        </div>
+        <div className="hero-console" aria-hidden="true"><div><span>system.profile</span><b>READY</b></div><pre><code><i>role</i>      full_stack_developer{"\n"}<i>location</i>  india / ist{"\n"}<i>target</i>    ai_engineering{"\n"}<i>mode</i>      building</code></pre></div>
       </section>
-      <div className="overview-metrics">
-        <article><span>01</span><div><small>FOCUS</small><strong>Useful products</strong><p>Clear interfaces backed by dependable systems.</p></div></article>
-        <article><span>02</span><div><small>TOOLKIT</small><strong>TypeScript + React</strong><p>Modern full-stack foundations, built to scale.</p></div></article>
-        <article><span>03</span><div><small>NEXT</small><strong>Applied AI</strong><p>Learning to turn models into practical tools.</p></div></article>
+      <div className="dashboard-metrics">
+        <button onClick={() => onNavigate("projects")}><span>Projects</span><strong>05</strong><i>Selected work <ArrowUpRight size={13} /></i></button>
+        <button onClick={() => onNavigate("hackathons")}><span>Hackathons</span><strong>02</strong><i>Build sprints <ArrowUpRight size={13} /></i></button>
+        <button onClick={() => onNavigate("goals")}><span>Current Goal</span><strong>AI Engineer</strong><i>View roadmap <ArrowUpRight size={13} /></i></button>
+      </div>
+      <div className="social-window-grid">
+        <GithubProfileWindow compact />
+        <section className="profile-window linkedin-profile-window">
+          <div className="os-window-bar"><span>linkedin.com/in/username</span><div><i /><i /><i /></div></div>
+          <div className="profile-window-body">
+            <div className="linkedin-brand"><span><Network size={22} /></span><small>PROFILE PREVIEW</small></div>
+            <h3>YOUR NAME</h3><p className="linkedin-handle">Full-Stack Developer</p><p className="linkedin-direction">Aspiring AI Engineer</p>
+            <p className="linkedin-about">Building practical software at the intersection of engineering, automation and AI.</p>
+            <div className="linkedin-sections"><button onClick={() => onNavigate("hackathons")}><Trophy size={15} /> Hackathons</button><button onClick={() => onNavigate("projects")}><BriefcaseBusiness size={15} /> Projects</button><button onClick={() => onNavigate("about")}><Code2 size={15} /> Skills</button></div>
+            <a className="profile-open-link" href="https://www.linkedin.com/in/username" target="_blank" rel="noreferrer">View LinkedIn <ArrowUpRight size={15} /></a>
+          </div>
+        </section>
       </div>
     </div>
   );
