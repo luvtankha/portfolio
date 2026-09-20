@@ -242,6 +242,19 @@ body { min-height: 100vh; overflow-x: hidden; }
 .sidebar-foot span, .sidebar-foot strong { display: block; }
 .sidebar-foot span { margin-bottom: 6px; color: #52525b; font: 9px var(--font-mono, monospace); letter-spacing: .12em; }
 .sidebar-foot strong { color: #a1a1aa; font: 11px var(--font-mono, monospace); }
+.sidebar-bottom { margin-top: auto; }
+.currently-learning-widget { overflow: hidden; margin: 20px 0 14px; border: 1px solid #342b45; border-radius: 11px; background: linear-gradient(145deg, rgba(139,92,246,.1), rgba(21,21,24,.94) 55%); box-shadow: 0 12px 27px rgba(0,0,0,.17); }
+.widget-titlebar { display: flex; align-items: center; justify-content: space-between; padding: 10px 11px; border-bottom: 1px solid #332a40; color: #c4b5fd; font: 9px var(--font-mono, monospace); letter-spacing: .095em; }
+.widget-titlebar i { width: 5px; height: 5px; border-radius: 50%; background: #a78bfa; box-shadow: 0 0 8px rgba(167,139,250,.8); }
+.widget-body { display: grid; gap: 14px; padding: 14px 12px 12px; }
+.learning-item strong, .learning-next strong { display: block; color: #e4e4e7; font-size: 11px; letter-spacing: -.015em; }
+.learning-milestone-bar { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; margin-top: 7px; }
+.learning-milestone-bar i { height: 4px; border-radius: 2px; background: #31313a; }
+.learning-milestone-bar i.complete { background: linear-gradient(90deg, #8b5cf6, #b49bf8); box-shadow: 0 0 6px rgba(139,92,246,.28); }
+.learning-next { padding-top: 2px; border-top: 1px solid rgba(255,255,255,.055); }
+.learning-next small { display: block; margin: 11px 0 5px; color: #71717a; font: 8px var(--font-mono, monospace); letter-spacing: .11em; }
+.learning-next strong { color: #c4b5fd; }
+.currently-learning-widget > p { margin: 0; padding: 8px 11px 10px; border-top: 1px solid rgba(255,255,255,.04); color: #666671; font: 8px/1.35 var(--font-mono, monospace); }
 .portfolio-content { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #34343c transparent; }
 .portfolio-content > div > div { min-height: calc(100vh - 98px); }
 .dash-overview { padding: clamp(28px, 5vw, 72px); }
@@ -436,7 +449,7 @@ body { min-height: 100vh; overflow-x: hidden; }
   .portfolio-body { grid-template-columns: 76px minmax(0, 1fr); }
   .portfolio-sidebar { padding-inline: 9px; }
   .portfolio-sidebar button { grid-template-columns: 1fr; justify-items: center; padding: 12px 8px; }
-  .portfolio-sidebar button span, .portfolio-sidebar button i, .sidebar-foot { display: none; }
+  .portfolio-sidebar button span, .portfolio-sidebar button i, .sidebar-bottom { display: none; }
   .identity-panel { grid-template-columns: 1fr; }
   .learning-orbit { min-height: 310px; border-left: 0; border-top: 1px solid #292930; }
   .overview-metrics, .dash-projects { grid-template-columns: 1fr; }

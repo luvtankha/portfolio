@@ -19,6 +19,7 @@ import { TechnologyGraph } from "@/components/portfolio/technology-graph";
 import { HackathonTimeline } from "@/components/hackathons/hackathon-timeline";
 import { ProjectExplorer } from "@/components/projects/project-explorer";
 import { Roadmap } from "@/components/goals/roadmap";
+import { CurrentlyLearningWidget } from "@/components/goals/currently-learning-widget";
 
 type Section = "overview" | "about" | "projects" | "hackathons" | "github" | "goals" | "contact";
 
@@ -104,7 +105,7 @@ export function PortfolioDashboard() {
       <div className="portfolio-body">
         <aside className="portfolio-sidebar">
           <nav aria-label="Portfolio sections">{navigation.map(item => { const Icon = item.icon; return <button key={item.id} className={active === item.id ? "active" : ""} onClick={() => setActive(item.id)}><Icon size={16} /><span>{item.label}</span><i /></button>; })}</nav>
-          <div className="sidebar-foot"><span>LOCAL TIME</span><strong>IST · UTC+5:30</strong></div>
+          <div className="sidebar-bottom"><CurrentlyLearningWidget /><div className="sidebar-foot"><span>LOCAL TIME</span><strong>IST · UTC+5:30</strong></div></div>
         </aside>
         <section className="portfolio-content" aria-live="polite">
           <AnimatePresence mode="wait"><motion.div key={active} initial={reduceMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? undefined : { opacity: 0, y: -5 }} transition={{ duration: .22 }}>{panels[active]}</motion.div></AnimatePresence>
