@@ -14,11 +14,11 @@ import {
   UserRound,
 } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { goals } from "@/data/goals";
 import { GithubActivity, GithubProfileWindow } from "@/components/github/github-activity";
 import { TechnologyGraph } from "@/components/portfolio/technology-graph";
 import { HackathonTimeline } from "@/components/hackathons/hackathon-timeline";
 import { ProjectExplorer } from "@/components/projects/project-explorer";
+import { Roadmap } from "@/components/goals/roadmap";
 
 type Section = "overview" | "about" | "projects" | "hackathons" | "github" | "goals" | "contact";
 
@@ -85,7 +85,7 @@ function GithubPanel() {
 }
 
 function Goals() {
-  return <div className="dash-section"><div className="content-heading"><span>05 / ROADMAP</span><h2>Goals</h2><p>Progress is easier to sustain when the next milestone stays visible.</p></div><div className="goal-dashboard">{goals.map((goal, index) => <article key={goal.label}><span>0{index + 1}</span><div><h3>{goal.label}</h3><i><b style={{ width: `${goal.progress}%` }} /></i></div><strong>{goal.progress}%</strong></article>)}</div><article className="learning-card"><small>LEARNING PATH</small><h3>Full-Stack Development <span>→</span> AI Engineering</h3><p>Building stronger foundations in model integration, retrieval, evaluation, and production AI systems.</p></article></div>;
+  return <div className="dash-section goals-roadmap-section"><div className="content-heading"><span>05 / DIRECTION</span><h2>My roadmap</h2><p>A deliberate path from strong programming foundations to production-minded AI systems.</p></div><Roadmap /></div>;
 }
 
 function Contact() {
