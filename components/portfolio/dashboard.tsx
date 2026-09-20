@@ -17,8 +17,8 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { projects } from "@/data/projects";
 import { hackathons } from "@/data/hackathons";
 import { goals } from "@/data/goals";
-import { skillGroups } from "@/data/skills";
 import { GithubActivity, GithubProfileWindow } from "@/components/github/github-activity";
+import { TechnologyGraph } from "@/components/portfolio/technology-graph";
 
 type Section = "overview" | "about" | "projects" | "hackathons" | "github" | "goals" | "contact";
 
@@ -69,7 +69,7 @@ function Overview({ onNavigate }: { onNavigate: (section: Section) => void }) {
 }
 
 function About() {
-  return <div className="dash-section"><div className="content-heading"><span>01 / PROFILE</span><h2>About</h2><p>I build across the stack and care deeply about the interface between people and technology.</p></div><div className="about-grid"><article className="dash-card wide"><small>MY DIRECTION</small><h3>From full-stack foundations to intelligent products.</h3><p>I&apos;m strengthening my product engineering skills while moving deliberately into AI engineering—learning how to build reliable, useful experiences around modern models.</p></article><article className="dash-card"><small>BASED IN</small><h3>India</h3><p>Working in IST and open to collaborating across time zones.</p></article>{skillGroups.map(group => <article className="dash-card" key={group.label}><small>{group.label.toUpperCase()}</small><ul>{group.skills.map(skill => <li key={skill}><Code2 size={14} />{skill}</li>)}</ul></article>)}</div></div>;
+  return <div className="dash-section"><div className="content-heading"><span>01 / PROFILE</span><h2>About</h2><p>A growing engineering toolkit, guided by curiosity about how modern software works end-to-end.</p></div><div className="about-md-window"><div className="os-window-bar"><span>ABOUT_ME.md</span><div><i /><i /><i /></div></div><div className="about-md-content"><p>Developer focused on understanding how modern software systems work end-to-end.</p><small>CURRENTLY EXPLORING</small><ul><li>Java + DSA</li><li>Full-Stack Engineering</li><li>Cloud / DevOps</li><li>AI Engineering</li><li>AI Automation</li></ul><p>I enjoy turning ideas into working products and understanding the systems underneath them.</p></div></div><TechnologyGraph /><div className="about-grid"><article className="dash-card"><small>BASED IN</small><h3>India · IST</h3><p>Building consistently, learning publicly, and collaborating across time zones.</p></article></div></div>;
 }
 
 function Projects() {
