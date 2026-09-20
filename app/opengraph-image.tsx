@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "LUV TANKHA — Full-Stack Developer & AI Engineer";
+export const alt = "LUV TANKHA — Full-Stack Developer & Aspiring AI Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
