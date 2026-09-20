@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://render.com/schema/render.yaml.json
+
+services:
+  - type: web
+    name: luvtankha-portfolio
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NITRO_PRESET
+        value: render-com
+      - key: HOST
+        value: 0.0.0.0
+      - key: NODE_VERSION
+        value: 22.22.0
+      - key: GITHUB_USERNAME
+        value: luvtankha
