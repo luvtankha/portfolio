@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, BookOpen, GitFork, Star, Users } from "lucide-react";
 import { motion, useDragControls, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 
 type Repo = { id: number; name: string; html_url: string; description: string | null; language: string | null; stargazers_count: number; forks_count: number };
 type Profile = { login: string; name: string | null; avatar_url: string; html_url: string; bio: string | null; public_repos: number; followers: number };
@@ -33,7 +34,7 @@ export function GithubProfileWindow({ compact = false, draggable = true }: { com
       <div className={`os-window-bar ${draggable ? "draggable-window-bar" : ""}`} onPointerDown={(event) => draggable && !reduceMotion && dragControls.start(event)}><span>github.com/{data.profile.login}</span><div><i /><i /><i /></div></div>
       <div className="profile-window-body">
         <div className="github-identity">
-          {data.profile.avatar_url ? <img src={data.profile.avatar_url} alt={`${data.profile.login} avatar`} /> : <div className="avatar-fallback">YN</div>}
+          {data.profile.avatar_url ? <Image src={data.profile.avatar_url} alt={`${data.profile.login} avatar`} width={60} height={60} sizes="60px" /> : <div className="avatar-fallback">YN</div>}
           <div><p className="live-label"><i />{isLive ? "LIVE FROM GITHUB API" : "GITHUB PREVIEW"}</p><h3>{data.profile.name || data.profile.login}</h3><a href={data.profile.html_url} target="_blank" rel="noreferrer">@{data.profile.login}</a><p>{data.profile.bio || "Developer building in public."}</p></div>
         </div>
         <div className="github-stats"><div><BookOpen size={15} /><span><strong>{data.profile.public_repos}</strong><small>Repositories</small></span></div><div><Users size={15} /><span><strong>{data.profile.followers}</strong><small>Followers</small></span></div><div><Star size={15} /><span><strong>{stars}</strong><small>Recent stars</small></span></div></div>

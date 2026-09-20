@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
   BriefcaseBusiness,
@@ -14,16 +14,37 @@ import {
   UserRound,
 } from "lucide-react";
 import { motion, AnimatePresence, useDragControls, useReducedMotion } from "framer-motion";
-import { GithubActivity, GithubProfileWindow } from "@/components/github/github-activity";
-import { TechnologyGraph } from "@/components/portfolio/technology-graph";
-import { HackathonTimeline } from "@/components/hackathons/hackathon-timeline";
-import { ProjectExplorer } from "@/components/projects/project-explorer";
-import { Roadmap } from "@/components/goals/roadmap";
+import { GithubProfileWindow } from "@/components/github/github-activity";
 import { CurrentlyLearningWidget } from "@/components/goals/currently-learning-widget";
 import { CommandPalette, type PortfolioSection } from "@/components/portfolio/command-palette";
 import { TerminalEasterEgg } from "@/components/portfolio/terminal-easter-egg";
 
 type Section = PortfolioSection;
+
+const TechnologyGraph = lazy(() => import("@/components/portfolio/technology-graph").then(module => ({ default: module.TechnologyGraph })));
+const ProjectExplorer = lazy(() => import("@/components/projects/project-explorer").then(module => ({ default: module.ProjectExplorer })));
+const HackathonTimeline = lazy(() => import("@/components/hackathons/hackathon-timeline").then(module => ({ default: module.HackathonTimeline })));
+const GithubActivity = lazy(() => import("@/components/github/github-activity").then(module => ({ default: module.GithubActivity })));
+const Roadmap = lazy(() => import("@/components/goals/roadmap").then(module => ({ default: module.Roadmap })));
+
+function DeferredPanel({ label, children }: { label: string; children: React.ReactNode }) {
+  return <Suspense fallback={<div className="async-panel-placeholder" role="status" aria-label={`Loading ${label}`}><i /> Loading {label}…</div>}>{children}</Suspense>;
+}
+
+function DeferredMobileSection({ id, children }: { id: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const target = ref.current;
+    if (!target || !window.IntersectionObserver) { setReady(true); return; }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setReady(true); observer.disconnect(); }
+    }, { rootMargin: "450px 0px" });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+  return <section id={id} ref={ref} className="mobile-page-block deferred-mobile-section" aria-busy={!ready}>{ready ? children : <div className="mobile-section-placeholder" aria-hidden="true" />}</section>;
+}
 
 const navigation: { id: Section; label: string; icon: typeof Compass }[] = [
   { id: "overview", label: "Overview", icon: Compass },
@@ -74,23 +95,23 @@ function Overview({ onNavigate, draggable = true }: { onNavigate: (section: Sect
 }
 
 function About() {
-  return <div className="dash-section"><div className="content-heading"><span>01 / PROFILE</span><h2>About</h2><p>A growing engineering toolkit, guided by curiosity about how modern software works end-to-end.</p></div><div className="about-md-window"><div className="os-window-bar"><span>ABOUT_ME.md</span><div><i /><i /><i /></div></div><div className="about-md-content"><p>Developer focused on understanding how modern software systems work end-to-end.</p><small>CURRENTLY EXPLORING</small><ul><li>Java + DSA</li><li>Full-Stack Engineering</li><li>Cloud / DevOps</li><li>AI Engineering</li><li>AI Automation</li></ul><p>I enjoy turning ideas into working products and understanding the systems underneath them.</p></div></div><TechnologyGraph /><div className="about-grid"><article className="dash-card"><small>BASED IN</small><h3>India · IST</h3><p>Building consistently, learning publicly, and collaborating across time zones.</p></article></div></div>;
+  return <div className="dash-section"><div className="content-heading"><span>01 / PROFILE</span><h2>About</h2><p>A growing engineering toolkit, guided by curiosity about how modern software works end-to-end.</p></div><div className="about-md-window"><div className="os-window-bar"><span>ABOUT_ME.md</span><div><i /><i /><i /></div></div><div className="about-md-content"><p>Developer focused on understanding how modern software systems work end-to-end.</p><small>CURRENTLY EXPLORING</small><ul><li>Java + DSA</li><li>Full-Stack Engineering</li><li>Cloud / DevOps</li><li>AI Engineering</li><li>AI Automation</li></ul><p>I enjoy turning ideas into working products and understanding the systems underneath them.</p></div></div><DeferredPanel label="technology graph"><TechnologyGraph /></DeferredPanel><div className="about-grid"><article className="dash-card"><small>BASED IN</small><h3>India · IST</h3><p>Building consistently, learning publicly, and collaborating across time zones.</p></article></div></div>;
 }
 
 function Projects({ onNavigate }: { onNavigate: (section: Section) => void }) {
-  return <div className="dash-section"><div className="content-heading"><span>02 / WORKSPACE</span><h2>Projects</h2><p>Open a project file to inspect its focus, stack, and next step.</p></div><ProjectExplorer onCaseStudy={() => onNavigate("hackathons")} /></div>;
+  return <div className="dash-section"><div className="content-heading"><span>02 / WORKSPACE</span><h2>Projects</h2><p>Open a project file to inspect its focus, stack, and next step.</p></div><DeferredPanel label="project explorer"><ProjectExplorer onCaseStudy={() => onNavigate("hackathons")} /></DeferredPanel></div>;
 }
 
 function Hackathons() {
-  return <div className="dash-section hackathons-section"><div className="content-heading"><span>03 / BUILD SPRINTS</span><h2>Hackathons</h2><p>Fast-moving environments where the problem, system design, and product all have to come together.</p></div><HackathonTimeline /></div>;
+  return <div className="dash-section hackathons-section"><div className="content-heading"><span>03 / BUILD SPRINTS</span><h2>Hackathons</h2><p>Fast-moving environments where the problem, system design, and product all have to come together.</p></div><DeferredPanel label="hackathon timeline"><HackathonTimeline /></DeferredPanel></div>;
 }
 
 function GithubPanel() {
-  return <div className="dash-section"><div className="content-heading"><span>04 / OPEN SOURCE</span><h2>GitHub</h2><p>Live API preview. Add your GitHub username to replace the demonstration repositories.</p></div><div className="github-dashboard"><div className="github-summary"><GitBranch size={28} /><div><small>GITHUB API</small><strong>Live repository feed</strong></div><span>DEMO</span></div><GithubActivity /></div></div>;
+  return <div className="dash-section"><div className="content-heading"><span>04 / OPEN SOURCE</span><h2>GitHub</h2><p>Live API preview. Add your GitHub username to replace the demonstration repositories.</p></div><div className="github-dashboard"><div className="github-summary"><GitBranch size={28} /><div><small>GITHUB API</small><strong>Live repository feed</strong></div><span>DEMO</span></div><DeferredPanel label="GitHub activity"><GithubActivity /></DeferredPanel></div></div>;
 }
 
 function Goals() {
-  return <div className="dash-section goals-roadmap-section"><div className="content-heading"><span>05 / DIRECTION</span><h2>My roadmap</h2><p>A deliberate path from strong programming foundations to production-minded AI systems.</p></div><Roadmap /></div>;
+  return <div className="dash-section goals-roadmap-section"><div className="content-heading"><span>05 / DIRECTION</span><h2>My roadmap</h2><p>A deliberate path from strong programming foundations to production-minded AI systems.</p></div><DeferredPanel label="roadmap"><Roadmap /></DeferredPanel></div>;
 }
 
 function Contact() {
@@ -107,12 +128,12 @@ function MobilePortfolio() {
       </header>
       <div className="mobile-content">
         <section id="mobile-overview" className="mobile-page-block"><Overview onNavigate={scrollToSection} draggable={false} /><div className="mobile-learning-wrap"><CurrentlyLearningWidget /></div></section>
-        <section id="mobile-about" className="mobile-page-block"><About /></section>
-        <section id="mobile-projects" className="mobile-page-block"><Projects onNavigate={scrollToSection} /></section>
-        <section id="mobile-hackathons" className="mobile-page-block"><Hackathons /></section>
-        <section id="mobile-github" className="mobile-page-block"><GithubPanel /></section>
-        <section id="mobile-goals" className="mobile-page-block"><Goals /></section>
-        <section id="mobile-contact" className="mobile-page-block"><Contact /></section>
+        <DeferredMobileSection id="mobile-about"><About /></DeferredMobileSection>
+        <DeferredMobileSection id="mobile-projects"><Projects onNavigate={scrollToSection} /></DeferredMobileSection>
+        <DeferredMobileSection id="mobile-hackathons"><Hackathons /></DeferredMobileSection>
+        <DeferredMobileSection id="mobile-github"><GithubPanel /></DeferredMobileSection>
+        <DeferredMobileSection id="mobile-goals"><Goals /></DeferredMobileSection>
+        <DeferredMobileSection id="mobile-contact"><Contact /></DeferredMobileSection>
       </div>
       <TerminalEasterEgg onNavigate={scrollToSection} />
     </main>

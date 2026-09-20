@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Terminal, X } from "lucide-react";
 import { createPortal } from "react-dom";
 import type { PortfolioSection } from "@/components/portfolio/command-palette";
@@ -32,13 +32,11 @@ const sectionCommands: Record<string, PortfolioSection> = {
 };
 
 export function TerminalEasterEgg({ onNavigate }: { onNavigate: (section: PortfolioSection) => void }) {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [lines, setLines] = useState<TerminalLine[]>([{ prompt: "$ help", text: helpText }]);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) return;

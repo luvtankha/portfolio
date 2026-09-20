@@ -298,6 +298,8 @@ body { min-height: 100vh; overflow-x: hidden; }
 .currently-learning-widget > p { margin: 0; padding: 8px 11px 10px; border-top: 1px solid rgba(255,255,255,.04); color: #666671; font: 8px/1.35 var(--font-mono, monospace); }
 .portfolio-content { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #34343c transparent; }
 .portfolio-content > div > div { min-height: calc(100vh - 98px); }
+.async-panel-placeholder { display: flex; align-items: center; gap: 9px; min-height: 170px; padding: 22px; border: 1px solid #292930; border-radius: 13px; color: #71717a; background: #151518; font: 11px var(--font-mono, monospace); }
+.async-panel-placeholder i { width: 14px; height: 14px; border: 2px solid #4a3a66; border-top-color: #a78bfa; border-radius: 50%; animation: async-spin .8s linear infinite; }
 .dash-overview { padding: clamp(28px, 5vw, 72px); }
 .identity-panel { min-height: 410px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); align-items: center; overflow: hidden; border: 1px solid #292930; border-radius: 16px; background: radial-gradient(circle at 80% 50%, rgba(139,92,246,.1), transparent 32%), #151518; }
 .identity-copy { padding: 50px clamp(30px, 5vw, 70px); }
@@ -521,6 +523,8 @@ body { min-height: 100vh; overflow-x: hidden; }
   .mobile-content { overflow: hidden; }
   .mobile-page-block { scroll-margin-top: 108px; border-bottom: 1px solid rgba(255,255,255,.055); }
   .mobile-page-block:last-child { border-bottom: 0; }
+  .deferred-mobile-section { min-height: 240px; }
+  .mobile-section-placeholder { min-height: 240px; background: linear-gradient(90deg, transparent, rgba(139,92,246,.035), transparent); }
   .mobile-page-block .dash-overview, .mobile-page-block .dash-section { max-width: 720px; margin: 0 auto; padding: 40px 18px; }
   .mobile-page-block .dashboard-hero-copy { padding: 34px 23px; }
   .mobile-page-block .dashboard-hero-copy h1 { font-size: clamp(43px, 14vw, 66px); }
@@ -708,3 +712,5 @@ body { min-height: 100vh; overflow-x: hidden; }
   0%, 100% { color: #8b70bd; opacity: .35; }
   50% { color: #d8b4fe; opacity: 1; text-shadow: 0 0 11px rgba(216,180,254,.75); }
 }
+
+@keyframes async-spin { to { transform: rotate(360deg); } }

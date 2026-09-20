@@ -28,24 +28,27 @@ export function CommandPalette({ onNavigate }: { onNavigate: (section: Portfolio
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const closePalette = () => {
+    setOpen(false);
+    setQuery("");
+    setSelectedIndex(0);
+  };
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
         setOpen(current => !current);
       }
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        setQuery("");
+        setSelectedIndex(0);
+      }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
-
-  useEffect(() => {
-    if (!open) {
-      setQuery("");
-      setSelectedIndex(0);
-    }
-  }, [open]);
 
   const matches = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -55,7 +58,7 @@ export function CommandPalette({ onNavigate }: { onNavigate: (section: Portfolio
 
   const select = (section: PortfolioSection) => {
     onNavigate(section);
-    setOpen(false);
+    closePalette();
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -73,9 +76,9 @@ export function CommandPalette({ onNavigate }: { onNavigate: (section: Portfolio
     }
   };
 
-  const palette = <div className="command-overlay" role="presentation" onMouseDown={() => setOpen(false)}>
+  const palette = <div className="command-overlay" role="presentation" onMouseDown={closePalette}>
     <section className="command-palette" role="dialog" aria-modal="true" aria-label="Search portfolio" onMouseDown={event => event.stopPropagation()}>
-      <div className="command-input-wrap"><Search size={17} /><input autoFocus value={query} onChange={event => { setQuery(event.target.value); setSelectedIndex(0); }} onKeyDown={handleInputKeyDown} placeholder="Search portfolio..." aria-label="Search portfolio commands" /><button type="button" onClick={() => setOpen(false)} aria-label="Close command palette"><X size={16} /></button></div>
+      <div className="command-input-wrap"><Search size={17} /><input autoFocus value={query} onChange={event => { setQuery(event.target.value); setSelectedIndex(0); }} onKeyDown={handleInputKeyDown} placeholder="Search portfolio..." aria-label="Search portfolio commands" /><button type="button" onClick={closePalette} aria-label="Close command palette"><X size={16} /></button></div>
       <div className="command-results" role="listbox" aria-label="Portfolio commands">
         {matches.length ? matches.map((item, index) => <button type="button" key={item.label} role="option" aria-selected={selectedIndex === index} className={selectedIndex === index ? "selected" : ""} onMouseEnter={() => setSelectedIndex(index)} onClick={() => select(item.section)}><span><strong>{item.label}</strong><small>{item.hint}</small></span><ArrowRight size={15} /></button>) : <p>No commands found.</p>}
       </div>
