@@ -10,6 +10,7 @@ import {
   Goal,
   Mail,
   Network,
+  Phone,
   Trophy,
   UserRound,
 } from "lucide-react";
@@ -64,10 +65,11 @@ function Overview({ onNavigate, draggable = true }: { onNavigate: (section: Sect
       <section className="dashboard-hero">
         <div className="hero-system-label"><span>PROFILE / OVERVIEW</span><p><i /> BUILDING</p></div>
         <div className="dashboard-hero-copy">
-          <h1>FULL-STACK<br />DEVELOPER</h1>
-          <p className="dashboard-direction">→ <span>AI ENGINEER</span></p>
-          <p className="dashboard-statement">Building software, AI systems and automation.</p>
-          <div className="dash-actions"><button onClick={() => onNavigate("projects")}>Explore Work <ArrowUpRight size={16} /></button><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a><a href="mailto:hello@example.com?subject=Resume request">Resume</a></div>
+          <h1>LUV TANKHA</h1>
+          <p className="dashboard-role">Full-Stack Developer</p>
+          <p className="dashboard-direction">→ <span>ASPIRING AI ENGINEER</span></p>
+          <p className="dashboard-statement">Third-year B.Tech Data Science student building full-stack software, intelligent systems and automation.</p>
+          <div className="dash-actions"><button onClick={() => onNavigate("projects")}>Explore Work <ArrowUpRight size={16} /></button><a href="https://github.com/luvtankha" target="_blank" rel="noopener noreferrer">GitHub</a><a href="/resume">Resume</a></div>
         </div>
         <div className="hero-console" aria-hidden="true"><div><span>system.profile</span><b>READY</b></div><pre><code><i>role</i>      full_stack_developer{"\n"}<i>location</i>  india / ist{"\n"}<i>target</i>    ai_engineering{"\n"}<i>mode</i>      building</code></pre></div>
       </section>
@@ -81,13 +83,13 @@ function Overview({ onNavigate, draggable = true }: { onNavigate: (section: Sect
       <button className="overview-roadmap-preview" type="button" onClick={() => onNavigate("goals")}><span>ROADMAP</span><strong>Full Stack <i>→</i> AI Engineering</strong><small>Open career direction <ArrowUpRight size={14} /></small></button>
       <div className="social-window-grid overview-linkedin-window">
         <motion.section className="profile-window linkedin-profile-window" drag={draggable && !reduceMotion ? "x" : false} dragControls={linkedInDragControls} dragListener={false} dragConstraints={{ left: -10, right: 10 }} dragElastic={.08} dragSnapToOrigin whileHover={reduceMotion ? undefined : { y: -3 }}>
-          <div className={`os-window-bar ${draggable ? "draggable-window-bar" : ""}`} onPointerDown={(event) => draggable && !reduceMotion && linkedInDragControls.start(event)}><span>linkedin.com/in/username</span><div><i /><i /><i /></div></div>
+          <div className={`os-window-bar ${draggable ? "draggable-window-bar" : ""}`} onPointerDown={(event) => draggable && !reduceMotion && linkedInDragControls.start(event)}><span>linkedin.com/in/luv-tankha-aa9532324</span><div><i /><i /><i /></div></div>
           <div className="profile-window-body">
             <div className="linkedin-brand"><span><Network size={22} /></span><small>PROFILE PREVIEW</small></div>
-            <h3>YOUR NAME</h3><p className="linkedin-handle">Full-Stack Developer</p><p className="linkedin-direction">Aspiring AI Engineer</p>
-            <p className="linkedin-about">Building practical software at the intersection of engineering, automation and AI.</p>
+            <h3>Luv Tankha</h3><p className="linkedin-handle">Full-Stack Developer</p><p className="linkedin-direction">Aspiring AI Engineer · B.Tech Data Science, MUIT</p>
+            <p className="linkedin-about">Team Leader & Tech Lead for HELIOS at Smart India Hackathon 2026. Building practical software while progressing toward AI engineering.</p>
             <div className="linkedin-sections"><button onClick={() => onNavigate("hackathons")}><Trophy size={15} /> Hackathons</button><button onClick={() => onNavigate("projects")}><BriefcaseBusiness size={15} /> Projects</button><button onClick={() => onNavigate("about")}><Code2 size={15} /> Skills</button></div>
-            <a className="profile-open-link" href="https://www.linkedin.com/in/username" target="_blank" rel="noreferrer">View LinkedIn <ArrowUpRight size={15} /></a>
+            <a className="profile-open-link" href="https://www.linkedin.com/in/luv-tankha-aa9532324" target="_blank" rel="noopener noreferrer">View LinkedIn <ArrowUpRight size={15} /></a>
           </div>
         </motion.section>
       </div>
@@ -96,7 +98,7 @@ function Overview({ onNavigate, draggable = true }: { onNavigate: (section: Sect
 }
 
 function About() {
-  return <div className="dash-section"><div className="content-heading"><span>01 / PROFILE</span><h2>About</h2><p>A growing engineering toolkit, guided by curiosity about how modern software works end-to-end.</p></div><div className="about-md-window"><div className="os-window-bar"><span>ABOUT_ME.md</span><div><i /><i /><i /></div></div><div className="about-md-content"><p>Developer focused on understanding how modern software systems work end-to-end.</p><small>CURRENTLY EXPLORING</small><ul><li>Java + DSA</li><li>Full-Stack Engineering</li><li>Cloud / DevOps</li><li>AI Engineering</li><li>AI Automation</li></ul><p>I enjoy turning ideas into working products and understanding the systems underneath them.</p></div></div><DeferredPanel label="technology graph"><TechnologyGraph /></DeferredPanel><div className="about-grid"><article className="dash-card"><small>BASED IN</small><h3>India · IST</h3><p>Building consistently, learning publicly, and collaborating across time zones.</p></article></div></div>;
+  return <div className="dash-section"><div className="content-heading"><span>01 / PROFILE</span><h2>About</h2><p>Third-year B.Tech Data Science student learning software engineering end-to-end and building toward AI engineering.</p></div><div className="about-md-window"><div className="os-window-bar"><span>ABOUT_ME.md</span><div><i /><i /><i /></div></div><div className="about-md-content"><p>I&apos;m Luv Tankha, a developer focused on understanding how modern software systems work end-to-end. I began by building with AI-assisted development, then started learning the layers underneath: frontend, backend, APIs, databases, deployment, infrastructure and AI.</p><small>CURRENTLY EXPLORING</small><ul><li>Java + DSA</li><li>Full-Stack Engineering</li><li>Cloud / DevOps</li><li>AI Engineering</li><li>AI Automation</li></ul><p>My long-term goal is to become an AI engineer capable of taking an idea from concept to production. Build first. Understand deeper. Improve continuously.</p></div></div><DeferredPanel label="technology graph"><TechnologyGraph /></DeferredPanel><div className="about-grid"><article className="dash-card"><small>EDUCATION</small><h3>B.Tech · Data Science</h3><p>MUIT · 3rd Year · CGPA 8.3</p></article><article className="dash-card"><small>BASED IN</small><h3>India · IST</h3><p>Focused on full-stack engineering, AI, automation and practical product building.</p></article></div></div>;
 }
 
 function Projects({ onNavigate }: { onNavigate: (section: Section) => void }) {
@@ -108,7 +110,7 @@ function Hackathons() {
 }
 
 function GithubPanel() {
-  return <div className="dash-section"><div className="content-heading"><span>04 / OPEN SOURCE</span><h2>GitHub</h2><p>Live API preview. Add your GitHub username to replace the demonstration repositories.</p></div><div className="github-dashboard"><div className="github-summary"><GitBranch size={28} /><div><small>GITHUB API</small><strong>Live repository feed</strong></div><span>DEMO</span></div><DeferredPanel label="GitHub activity"><GithubActivity /></DeferredPanel></div></div>;
+  return <div className="dash-section"><div className="content-heading"><span>04 / OPEN SOURCE</span><h2>GitHub</h2><p>Live repository data from github.com/luvtankha.</p></div><div className="github-dashboard"><div className="github-summary"><GitBranch size={28} /><div><small>GITHUB API</small><strong>Live repository feed</strong></div><span>LIVE</span></div><DeferredPanel label="GitHub activity"><GithubActivity /></DeferredPanel></div></div>;
 }
 
 function Goals() {
@@ -116,7 +118,7 @@ function Goals() {
 }
 
 function Contact() {
-  return <div className="dash-section contact-section"><div className="content-heading"><span>06 / SAY HELLO</span><h2>Let&apos;s build something useful.</h2><p>Open to collaborations, internships, and conversations about full-stack or AI engineering.</p></div><a className="contact-card" href="mailto:hello@example.com"><div><Mail size={24} /><span><small>EMAIL</small><strong>hello@example.com</strong></span></div><ArrowUpRight size={22} /></a><p className="contact-note">Replace the sample email and social links with your own details before sharing publicly.</p></div>;
+  return <div className="dash-section contact-section"><div className="content-heading"><span>06 / SAY HELLO</span><h2>Let&apos;s build something useful.</h2><p>Open to collaborations, hackathons, internships, and conversations about full-stack or AI engineering.</p></div><a className="contact-card" href="mailto:luvtankha06@gmail.com"><div><Mail size={24} /><span><small>EMAIL</small><strong>luvtankha06@gmail.com</strong></span></div><ArrowUpRight size={22} /></a><a className="contact-card" href="tel:+918178185449"><div><Phone size={24} /><span><small>PHONE</small><strong>+91 81781 85449</strong></span></div><ArrowUpRight size={22} /></a><a className="contact-card" href="https://www.linkedin.com/in/luv-tankha-aa9532324" target="_blank" rel="noopener noreferrer"><div><Network size={24} /><span><small>LINKEDIN</small><strong>luv-tankha-aa9532324</strong></span></div><ArrowUpRight size={22} /></a><a className="contact-card" href="https://github.com/luvtankha" target="_blank" rel="noopener noreferrer"><div><GitBranch size={24} /><span><small>GITHUB</small><strong>github.com/luvtankha</strong></span></div><ArrowUpRight size={22} /></a><p className="contact-note">B.Tech Data Science · MUIT · 3rd Year · CGPA 8.3</p></div>;
 }
 
 function MobilePortfolio() {
@@ -124,7 +126,7 @@ function MobilePortfolio() {
   return (
     <main className="mobile-portfolio">
       <header className="mobile-topbar">
-        <div className="mobile-brand-row"><div><span className="portfolio-glyph">P</span><strong>YOUR NAME</strong></div><CommandPalette onNavigate={scrollToSection} /><p><span className="status-dot" /> AVAILABLE</p></div>
+        <div className="mobile-brand-row"><div><span className="portfolio-glyph">P</span><strong>LUV TANKHA</strong></div><CommandPalette onNavigate={scrollToSection} /><p><span className="status-dot" /> AVAILABLE</p></div>
         <nav aria-label="Portfolio sections">{navigation.map(item => <button type="button" key={item.id} onClick={() => scrollToSection(item.id)}>{item.label}</button>)}</nav>
       </header>
       <div className="mobile-content">
@@ -158,7 +160,7 @@ export function PortfolioDashboard() {
   if (isMobile) return <MobilePortfolio />;
   return (
     <main className="portfolio-frame">
-      <header className="portfolio-topbar"><div><span className="portfolio-glyph">P</span><strong>YOUR NAME</strong></div><CommandPalette onNavigate={setActive} /><p><span className="status-dot" /> AVAILABLE</p></header>
+      <header className="portfolio-topbar"><div><span className="portfolio-glyph">P</span><strong>LUV TANKHA</strong></div><CommandPalette onNavigate={setActive} /><p><span className="status-dot" /> AVAILABLE</p></header>
       <div className="portfolio-body">
         <aside className="portfolio-sidebar">
           <nav aria-label="Portfolio sections">{navigation.map(item => { const Icon = item.icon; return <button key={item.id} className={active === item.id ? "active" : ""} onClick={() => setActive(item.id)}><Icon size={16} /><span>{item.label}</span><i /></button>; })}</nav>
