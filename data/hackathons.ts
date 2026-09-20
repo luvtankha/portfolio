@@ -1,5 +1,27 @@
-export const hackathons = [
-  { name: "Buildspace Nights & Weekends", project: "Signal", result: "Top 10 demo", year: "2025", description: "Built and shipped an incident timeline prototype in six weekends with a remote team of three." },
-  { name: "Hack the North", project: "Relay", result: "Finalist", year: "2024", description: "Created an accessible real-time caption relay for noisy public spaces in under 36 hours." },
-  { name: "Open Source Sprint", project: "TinyBench", result: "Community pick", year: "2024", description: "Designed a tiny browser performance harness with shareable, reproducible benchmarks." },
+export type Hackathon = {
+  year: string;
+  name: string;
+  domain: string;
+  project: string;
+  expansion: string;
+  status: string;
+  problemStatement: string;
+  team: string;
+  summary: string;
+  stack: string[];
+};
+
+export const hackathons: Hackathon[] = [
+  {
+    year: "2026",
+    name: "Smart India Hackathon",
+    domain: "Healthcare / AI",
+    project: "HELIOS",
+    expansion: "Healthcare Enabled Language & Intelligent Observation System",
+    status: "Internal Round Qualified",
+    problemStatement: "Design a practical healthcare support system that makes observations and information easier to understand and act on.",
+    team: "HELIOS project team",
+    summary: "An AI-enabled healthcare concept focused on turning complex observations into useful, accessible signals for people and systems.",
+    stack: ["Java", "Full-Stack", "AI", "Automation"],
+  },
 ];

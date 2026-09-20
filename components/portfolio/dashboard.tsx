@@ -15,10 +15,10 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { projects } from "@/data/projects";
-import { hackathons } from "@/data/hackathons";
 import { goals } from "@/data/goals";
 import { GithubActivity, GithubProfileWindow } from "@/components/github/github-activity";
 import { TechnologyGraph } from "@/components/portfolio/technology-graph";
+import { HackathonTimeline } from "@/components/hackathons/hackathon-timeline";
 
 type Section = "overview" | "about" | "projects" | "hackathons" | "github" | "goals" | "contact";
 
@@ -77,7 +77,7 @@ function Projects() {
 }
 
 function Hackathons() {
-  return <div className="dash-section"><div className="content-heading"><span>03 / SPRINTS</span><h2>Hackathons</h2><p>Fast builds, sharp constraints, and lessons earned in public.</p></div><div className="dash-list">{hackathons.map((item, index) => <article key={item.name}><span>0{index + 1}</span><div><small>{item.year} · {item.name}</small><h3>{item.project}</h3><p>{item.description}</p></div><strong>{item.result}</strong></article>)}</div></div>;
+  return <div className="dash-section hackathons-section"><div className="content-heading"><span>03 / BUILD SPRINTS</span><h2>Hackathons</h2><p>Fast-moving environments where the problem, system design, and product all have to come together.</p></div><HackathonTimeline /></div>;
 }
 
 function GithubPanel() {
