@@ -1,0 +1,25 @@
+name: Portfolio build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NITRO_PRESET: render-com
+      GITHUB_USERNAME: luvtankha
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+      - name: Install dependencies
+        run: npm install --include=dev
+      - name: Build
+        run: npm run build
