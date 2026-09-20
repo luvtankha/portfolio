@@ -13,7 +13,7 @@ import {
   Trophy,
   UserRound,
 } from "lucide-react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useDragControls, useReducedMotion } from "framer-motion";
 import { GithubActivity, GithubProfileWindow } from "@/components/github/github-activity";
 import { TechnologyGraph } from "@/components/portfolio/technology-graph";
 import { HackathonTimeline } from "@/components/hackathons/hackathon-timeline";
@@ -36,6 +36,8 @@ const navigation: { id: Section; label: string; icon: typeof Compass }[] = [
 ];
 
 function Overview({ onNavigate }: { onNavigate: (section: Section) => void }) {
+  const linkedInDragControls = useDragControls();
+  const reduceMotion = useReducedMotion();
   return (
     <div className="dash-overview">
       <section className="dashboard-hero">
@@ -56,8 +58,8 @@ function Overview({ onNavigate }: { onNavigate: (section: Section) => void }) {
       </div>
       <div className="social-window-grid">
         <GithubProfileWindow compact />
-        <section className="profile-window linkedin-profile-window">
-          <div className="os-window-bar"><span>linkedin.com/in/username</span><div><i /><i /><i /></div></div>
+        <motion.section className="profile-window linkedin-profile-window" drag={reduceMotion ? false : "x"} dragControls={linkedInDragControls} dragListener={false} dragConstraints={{ left: -10, right: 10 }} dragElastic={.08} dragSnapToOrigin whileHover={reduceMotion ? undefined : { y: -3 }}>
+          <div className="os-window-bar draggable-window-bar" onPointerDown={(event) => !reduceMotion && linkedInDragControls.start(event)}><span>linkedin.com/in/username</span><div><i /><i /><i /></div></div>
           <div className="profile-window-body">
             <div className="linkedin-brand"><span><Network size={22} /></span><small>PROFILE PREVIEW</small></div>
             <h3>YOUR NAME</h3><p className="linkedin-handle">Full-Stack Developer</p><p className="linkedin-direction">Aspiring AI Engineer</p>
@@ -65,7 +67,7 @@ function Overview({ onNavigate }: { onNavigate: (section: Section) => void }) {
             <div className="linkedin-sections"><button onClick={() => onNavigate("hackathons")}><Trophy size={15} /> Hackathons</button><button onClick={() => onNavigate("projects")}><BriefcaseBusiness size={15} /> Projects</button><button onClick={() => onNavigate("about")}><Code2 size={15} /> Skills</button></div>
             <a className="profile-open-link" href="https://www.linkedin.com/in/username" target="_blank" rel="noreferrer">View LinkedIn <ArrowUpRight size={15} /></a>
           </div>
-        </section>
+        </motion.section>
       </div>
     </div>
   );

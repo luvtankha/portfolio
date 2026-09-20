@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, BookOpen, GitFork, Star, Users } from "lucide-react";
+import { motion, useDragControls, useReducedMotion } from "framer-motion";
 
 type Repo = { id: number; name: string; html_url: string; description: string | null; language: string | null; stargazers_count: number; forks_count: number };
 type Profile = { login: string; name: string | null; avatar_url: string; html_url: string; bio: string | null; public_repos: number; followers: number };
@@ -18,6 +19,8 @@ const fallback: GithubData = {
 export function GithubProfileWindow({ compact = false }: { compact?: boolean }) {
   const [data, setData] = useState<GithubData>(fallback);
   const [isLive, setIsLive] = useState(false);
+  const dragControls = useDragControls();
+  const reduceMotion = useReducedMotion();
   useEffect(() => {
     fetch("/api/github").then((response) => response.ok ? response.json() : Promise.reject()).then((result: GithubData) => { setData(result); setIsLive(true); }).catch(() => null);
   }, []);
@@ -26,8 +29,8 @@ export function GithubProfileWindow({ compact = false }: { compact?: boolean }) 
   const visibleRepos = data.repos.slice(0, compact ? 2 : 4);
 
   return (
-    <section className={`profile-window github-profile-window ${compact ? "compact" : ""}`}>
-      <div className="os-window-bar"><span>github.com/{data.profile.login}</span><div><i /><i /><i /></div></div>
+    <motion.section className={`profile-window github-profile-window ${compact ? "compact" : ""}`} drag={reduceMotion ? false : "x"} dragControls={dragControls} dragListener={false} dragConstraints={{ left: -10, right: 10 }} dragElastic={.08} dragSnapToOrigin whileHover={reduceMotion ? undefined : { y: -3 }}>
+      <div className="os-window-bar draggable-window-bar" onPointerDown={(event) => !reduceMotion && dragControls.start(event)}><span>github.com/{data.profile.login}</span><div><i /><i /><i /></div></div>
       <div className="profile-window-body">
         <div className="github-identity">
           {data.profile.avatar_url ? <img src={data.profile.avatar_url} alt={`${data.profile.login} avatar`} /> : <div className="avatar-fallback">YN</div>}
@@ -38,7 +41,7 @@ export function GithubProfileWindow({ compact = false }: { compact?: boolean }) 
         <div className="recent-repos"><small>LATEST REPOSITORIES</small>{visibleRepos.map(repo => <a href={repo.html_url} target="_blank" rel="noreferrer" key={repo.id}><div><strong>{repo.name}</strong><p>{repo.description || "View repository on GitHub"}</p></div><span>{repo.language || "Code"}<i><Star size={11} />{repo.stargazers_count}</i><i><GitFork size={11} />{repo.forks_count}</i></span></a>)}</div>
         <a className="profile-open-link" href={data.profile.html_url} target="_blank" rel="noreferrer">Open GitHub <ArrowUpRight size={15} /></a>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
