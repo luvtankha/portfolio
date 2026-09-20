@@ -21,6 +21,7 @@ import { ProjectExplorer } from "@/components/projects/project-explorer";
 import { Roadmap } from "@/components/goals/roadmap";
 import { CurrentlyLearningWidget } from "@/components/goals/currently-learning-widget";
 import { CommandPalette, type PortfolioSection } from "@/components/portfolio/command-palette";
+import { TerminalEasterEgg } from "@/components/portfolio/terminal-easter-egg";
 
 type Section = PortfolioSection;
 
@@ -112,6 +113,7 @@ export function PortfolioDashboard() {
           <AnimatePresence mode="wait"><motion.div key={active} initial={reduceMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? undefined : { opacity: 0, y: -5 }} transition={{ duration: .22 }}>{panels[active]}</motion.div></AnimatePresence>
         </section>
       </div>
+      <TerminalEasterEgg onNavigate={setActive} />
     </main>
   );
 }
