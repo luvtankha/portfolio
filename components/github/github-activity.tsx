@@ -16,7 +16,7 @@ const fallback: GithubData = {
   ],
 };
 
-export function GithubProfileWindow({ compact = false }: { compact?: boolean }) {
+export function GithubProfileWindow({ compact = false, draggable = true }: { compact?: boolean; draggable?: boolean }) {
   const [data, setData] = useState<GithubData>(fallback);
   const [isLive, setIsLive] = useState(false);
   const dragControls = useDragControls();
@@ -29,8 +29,8 @@ export function GithubProfileWindow({ compact = false }: { compact?: boolean }) 
   const visibleRepos = data.repos.slice(0, compact ? 2 : 4);
 
   return (
-    <motion.section className={`profile-window github-profile-window ${compact ? "compact" : ""}`} drag={reduceMotion ? false : "x"} dragControls={dragControls} dragListener={false} dragConstraints={{ left: -10, right: 10 }} dragElastic={.08} dragSnapToOrigin whileHover={reduceMotion ? undefined : { y: -3 }}>
-      <div className="os-window-bar draggable-window-bar" onPointerDown={(event) => !reduceMotion && dragControls.start(event)}><span>github.com/{data.profile.login}</span><div><i /><i /><i /></div></div>
+    <motion.section className={`profile-window github-profile-window ${compact ? "compact" : ""}`} drag={draggable && !reduceMotion ? "x" : false} dragControls={dragControls} dragListener={false} dragConstraints={{ left: -10, right: 10 }} dragElastic={.08} dragSnapToOrigin whileHover={reduceMotion ? undefined : { y: -3 }}>
+      <div className={`os-window-bar ${draggable ? "draggable-window-bar" : ""}`} onPointerDown={(event) => draggable && !reduceMotion && dragControls.start(event)}><span>github.com/{data.profile.login}</span><div><i /><i /><i /></div></div>
       <div className="profile-window-body">
         <div className="github-identity">
           {data.profile.avatar_url ? <img src={data.profile.avatar_url} alt={`${data.profile.login} avatar`} /> : <div className="avatar-fallback">YN</div>}

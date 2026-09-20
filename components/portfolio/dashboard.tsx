@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
   BriefcaseBusiness,
@@ -35,7 +35,7 @@ const navigation: { id: Section; label: string; icon: typeof Compass }[] = [
   { id: "contact", label: "Contact", icon: Mail },
 ];
 
-function Overview({ onNavigate }: { onNavigate: (section: Section) => void }) {
+function Overview({ onNavigate, draggable = true }: { onNavigate: (section: Section) => void; draggable?: boolean }) {
   const linkedInDragControls = useDragControls();
   const reduceMotion = useReducedMotion();
   return (
@@ -57,9 +57,9 @@ function Overview({ onNavigate }: { onNavigate: (section: Section) => void }) {
         <button onClick={() => onNavigate("goals")}><span>Current Goal</span><strong>AI Engineer</strong><i>View roadmap <ArrowUpRight size={13} /></i></button>
       </div>
       <div className="social-window-grid">
-        <GithubProfileWindow compact />
-        <motion.section className="profile-window linkedin-profile-window" drag={reduceMotion ? false : "x"} dragControls={linkedInDragControls} dragListener={false} dragConstraints={{ left: -10, right: 10 }} dragElastic={.08} dragSnapToOrigin whileHover={reduceMotion ? undefined : { y: -3 }}>
-          <div className="os-window-bar draggable-window-bar" onPointerDown={(event) => !reduceMotion && linkedInDragControls.start(event)}><span>linkedin.com/in/username</span><div><i /><i /><i /></div></div>
+        <GithubProfileWindow compact draggable={draggable} />
+        <motion.section className="profile-window linkedin-profile-window" drag={draggable && !reduceMotion ? "x" : false} dragControls={linkedInDragControls} dragListener={false} dragConstraints={{ left: -10, right: 10 }} dragElastic={.08} dragSnapToOrigin whileHover={reduceMotion ? undefined : { y: -3 }}>
+          <div className={`os-window-bar ${draggable ? "draggable-window-bar" : ""}`} onPointerDown={(event) => draggable && !reduceMotion && linkedInDragControls.start(event)}><span>linkedin.com/in/username</span><div><i /><i /><i /></div></div>
           <div className="profile-window-body">
             <div className="linkedin-brand"><span><Network size={22} /></span><small>PROFILE PREVIEW</small></div>
             <h3>YOUR NAME</h3><p className="linkedin-handle">Full-Stack Developer</p><p className="linkedin-direction">Aspiring AI Engineer</p>
@@ -97,12 +97,43 @@ function Contact() {
   return <div className="dash-section contact-section"><div className="content-heading"><span>06 / SAY HELLO</span><h2>Let&apos;s build something useful.</h2><p>Open to collaborations, internships, and conversations about full-stack or AI engineering.</p></div><a className="contact-card" href="mailto:hello@example.com"><div><Mail size={24} /><span><small>EMAIL</small><strong>hello@example.com</strong></span></div><ArrowUpRight size={22} /></a><p className="contact-note">Replace the sample email and social links with your own details before sharing publicly.</p></div>;
 }
 
+function MobilePortfolio() {
+  const scrollToSection = (section: Section) => document.getElementById(`mobile-${section}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  return (
+    <main className="mobile-portfolio">
+      <header className="mobile-topbar">
+        <div className="mobile-brand-row"><div><span className="portfolio-glyph">P</span><strong>Portfolio</strong></div><CommandPalette onNavigate={scrollToSection} /><p><span className="status-dot" /> Online</p></div>
+        <nav aria-label="Portfolio sections">{navigation.map(item => <button type="button" key={item.id} onClick={() => scrollToSection(item.id)}>{item.label}</button>)}</nav>
+      </header>
+      <div className="mobile-content">
+        <section id="mobile-overview" className="mobile-page-block"><Overview onNavigate={scrollToSection} draggable={false} /><div className="mobile-learning-wrap"><CurrentlyLearningWidget /></div></section>
+        <section id="mobile-about" className="mobile-page-block"><About /></section>
+        <section id="mobile-projects" className="mobile-page-block"><Projects onNavigate={scrollToSection} /></section>
+        <section id="mobile-hackathons" className="mobile-page-block"><Hackathons /></section>
+        <section id="mobile-github" className="mobile-page-block"><GithubPanel /></section>
+        <section id="mobile-goals" className="mobile-page-block"><Goals /></section>
+        <section id="mobile-contact" className="mobile-page-block"><Contact /></section>
+      </div>
+      <TerminalEasterEgg onNavigate={scrollToSection} />
+    </main>
+  );
+}
+
 export function PortfolioDashboard() {
   const [active, setActive] = useState<Section>("overview");
+  const [isMobile, setIsMobile] = useState(false);
   const reduceMotion = useReducedMotion();
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 600px)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
   const panels: Record<Section, React.ReactNode> = {
     overview: <Overview onNavigate={setActive} />, about: <About />, projects: <Projects onNavigate={setActive} />, hackathons: <Hackathons />, github: <GithubPanel />, goals: <Goals />, contact: <Contact />,
   };
+  if (isMobile) return <MobilePortfolio />;
   return (
     <main className="portfolio-frame">
       <header className="portfolio-topbar"><div><span className="portfolio-glyph">P</span><strong>Portfolio</strong></div><CommandPalette onNavigate={setActive} /><p><span className="status-dot" /> Online</p></header>

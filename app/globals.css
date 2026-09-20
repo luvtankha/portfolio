@@ -225,6 +225,7 @@ h1, h2, h3, p { margin-top: 0; }
 /* Application-style portfolio shell */
 body { min-height: 100vh; overflow-x: hidden; }
 .portfolio-frame { width: min(1420px, calc(100% - 32px)); height: calc(100vh - 32px); min-height: 680px; margin: 16px auto; padding: 0; overflow: hidden; border: 1px solid #2d2d34; border-radius: 16px; background: rgba(15,15,18,.95); box-shadow: 0 30px 90px rgba(0,0,0,.42); }
+.mobile-portfolio { display: none; }
 .portfolio-topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 23px; border-bottom: 1px solid #292930; background: rgba(21,21,24,.92); backdrop-filter: blur(18px); }
 .portfolio-topbar > div, .portfolio-topbar p { display: flex; align-items: center; gap: 10px; }
 .portfolio-topbar strong { font: 700 14px var(--font-mono, monospace); letter-spacing: -.02em; }
@@ -505,6 +506,45 @@ body { min-height: 100vh; overflow-x: hidden; }
   .roadmap-detail { min-height: 0; }
 }
 @media (max-width: 600px) {
+  body { background: #09090b; }
+  .mobile-portfolio { display: block; min-height: 100dvh; background: radial-gradient(circle at 88% 0%, rgba(139,92,246,.09), transparent 19rem), #09090b; }
+  .mobile-topbar { position: sticky; z-index: 25; top: 0; border-bottom: 1px solid #292930; background: rgba(15,15,18,.94); backdrop-filter: blur(18px); }
+  .mobile-brand-row { height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+  .mobile-brand-row > div, .mobile-brand-row p { display: flex; align-items: center; gap: 9px; }
+  .mobile-brand-row strong { font: 700 13px var(--font-mono, monospace); }
+  .mobile-brand-row p { margin: 0; color: #a1a1aa; font-size: 10px; }
+  .mobile-brand-row .command-trigger { min-width: 0; padding: 8px; }
+  .mobile-brand-row .command-trigger > span, .mobile-brand-row .command-trigger kbd { display: none; }
+  .mobile-topbar nav { display: flex; gap: 3px; overflow-x: auto; padding: 0 11px 10px; scrollbar-width: none; }
+  .mobile-topbar nav button { flex: 0 0 auto; padding: 7px 10px; border: 1px solid transparent; border-radius: 7px; color: #a1a1aa; background: transparent; font: 10px var(--font-mono, monospace); letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+  .mobile-topbar nav button:hover, .mobile-topbar nav button:focus-visible { border-color: #4e3c6a; outline: 0; color: #e9ddff; background: rgba(139,92,246,.11); }
+  .mobile-content { overflow: hidden; }
+  .mobile-page-block { scroll-margin-top: 108px; border-bottom: 1px solid rgba(255,255,255,.055); }
+  .mobile-page-block:last-child { border-bottom: 0; }
+  .mobile-page-block .dash-overview, .mobile-page-block .dash-section { max-width: 720px; margin: 0 auto; padding: 40px 18px; }
+  .mobile-page-block .dashboard-hero-copy { padding: 34px 23px; }
+  .mobile-page-block .dashboard-hero-copy h1 { font-size: clamp(43px, 14vw, 66px); }
+  .mobile-page-block .dashboard-metrics { grid-template-columns: 1fr; gap: 10px; }
+  .mobile-page-block .dashboard-metrics button { min-height: 112px; }
+  .mobile-page-block .social-window-grid { grid-template-columns: 1fr; gap: 12px; }
+  .mobile-page-block .profile-window { width: 100%; }
+  .mobile-page-block .profile-window-body { padding: 19px; }
+  .mobile-page-block .linkedin-brand { margin-bottom: 19px; }
+  .mobile-learning-wrap { max-width: 720px; margin: -19px auto 0; padding: 0 18px 38px; }
+  .mobile-learning-wrap .currently-learning-widget { margin: 0; }
+  .mobile-page-block .content-heading { margin-bottom: 28px; }
+  .mobile-page-block .content-heading h2 { font-size: clamp(39px, 12vw, 58px); }
+  .mobile-page-block .project-explorer { min-height: 0; }
+  .mobile-page-block .roadmap-track { grid-template-columns: 1fr; gap: 0; }
+  .mobile-page-block .roadmap-track li { display: grid; grid-template-columns: 1fr 42px; align-items: center; }
+  .mobile-page-block .roadmap-track li > button { grid-column: 1; grid-template-columns: 32px 1fr; text-align: left; }
+  .mobile-page-block .roadmap-track li > i { display: grid; grid-column: 2; grid-row: 1; margin: 0; justify-self: end; transform: rotate(-90deg); }
+  .mobile-page-block .roadmap-track li:last-child > i { display: none; }
+  .mobile-page-block .roadmap-detail { min-height: 0; padding: 26px 21px; }
+  .mobile-page-block .roadmap-detail h3 { font-size: 40px; }
+  .mobile-page-block .roadmap-detail ul { grid-template-columns: 1fr; }
+  .mobile-portfolio .terminal-trigger { right: 14px; bottom: 16px; }
+  .mobile-portfolio .portfolio-terminal { right: 14px; bottom: 66px; width: calc(100vw - 28px); }
   .portfolio-frame { width: 100%; height: 100dvh; min-height: 600px; margin: 0; border: 0; border-radius: 0; }
   .portfolio-topbar { height: 58px; padding: 0 16px; }
   .command-trigger { min-width: 0; padding: 8px; }
