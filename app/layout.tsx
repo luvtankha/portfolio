@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://developer-desktop-portfolio.luvtankha.chatgpt.site"),
   title: {
-    default: "Luv Tankha — Full-Stack Developer & AI Engineer",
+    default: "Luv Tankha — Full-Stack Developer & Aspiring AI Engineer",
     template: "%s | Luv Tankha",
   },
   description: "Portfolio of a full-stack developer and aspiring AI engineer based in India.",
@@ -13,13 +13,13 @@ export const metadata: Metadata = {
   authors: [{ name: "Luv Tankha" }],
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Luv Tankha — Full-Stack Developer & AI Engineer",
+    title: "Luv Tankha — Full-Stack Developer & Aspiring AI Engineer",
     description: "Portfolio of a full-stack developer and aspiring AI engineer based in India.",
     type: "website",
     locale: "en_IN",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Luv Tankha — Full-Stack Developer & AI Engineer" }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Luv Tankha — Full-Stack Developer & Aspiring AI Engineer" }],
   },
-  twitter: { card: "summary_large_image", title: "Luv Tankha — Full-Stack Developer & AI Engineer", description: "Portfolio of a full-stack developer and aspiring AI engineer based in India.", images: ["/opengraph-image"] },
+  twitter: { card: "summary_large_image", title: "Luv Tankha — Full-Stack Developer & Aspiring AI Engineer", description: "Portfolio of a full-stack developer and aspiring AI engineer based in India.", images: ["/opengraph-image"] },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
