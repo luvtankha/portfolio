@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HeliosVideoWindow } from "@/components/media/helios-video-window";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -13,7 +12,6 @@ export default function ResumePage() {
     <p className="public-eyebrow">RESUME / LUV TANKHA</p>
     <h1>Luv Tankha</h1>
     <p className="public-lede">Full-Stack Developer · Aspiring AI Engineer</p>
-    <HeliosVideoWindow label="HELIOS portfolio demo" />
     <div className="public-grid">
       <article><small>EDUCATION</small><h2>B.Tech · Data Science</h2><p>MUIT · 3rd Year · CGPA 8.3</p></article>
       <article><small>PROFILE</small><p>Third-year B.Tech Data Science student focused on Java, DSA, full-stack engineering, backend systems, databases, deployment, and progressing toward AI engineering and automation.</p></article>
