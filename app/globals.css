@@ -650,6 +650,9 @@ body { min-height: 100vh; overflow-x: hidden; }
 .social-window-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; margin-top: 14px; }
 .overview-utility-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(245px, .85fr); gap: 14px; margin-top: 14px; }
 .overview-utility-grid .currently-learning-widget { height: 100%; margin: 0; }
+.overview-utility-grid .linkedin-profile-window { height: 100%; }
+.overview-learning-window { width: min(480px, 100%); margin: 14px 0 0 auto; }
+.overview-learning-window .currently-learning-widget { width: 100%; margin: 0; }
 .featured-helios-card { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 14px; padding: clamp(28px, 4vw, 48px); border: 1px solid #3f315a; border-radius: 14px; color: #f4f4f5; background: radial-gradient(circle at 84% 30%, rgba(139,92,246,.21), transparent 20rem), linear-gradient(115deg, rgba(139,92,246,.12), transparent 45%), #151518; text-align: left; cursor: pointer; transition: .22s ease; }
 .featured-helios-card:hover { border-color: #805fbd; box-shadow: 0 22px 52px rgba(139,92,246,.15); transform: translateY(-3px); }
 .featured-helios-card span, .overview-roadmap-preview > span { display: block; margin-bottom: 13px; color: #a78bfa; font: 10px var(--font-mono, monospace); letter-spacing: .13em; }
@@ -725,7 +728,7 @@ body { min-height: 100vh; overflow-x: hidden; }
 }
 @media (max-width: 900px) {
   .dashboard-metrics, .social-window-grid, .overview-utility-grid { grid-template-columns: 1fr; }
-  .overview-linkedin-window { width: 100%; }
+  .overview-linkedin-window, .overview-learning-window { width: 100%; }
 }
 @media (max-width: 600px) {
   .dashboard-hero-copy { padding: 31px 22px; }
