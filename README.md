@@ -72,3 +72,18 @@ Render configuration:
 - Auto deploy: enabled
 
 Use the **Deploy to Render** button above or create a Blueprint in Render from this repository.
+
+## Project Video Convention
+
+Project demo videos belong to the project that owns them; they should not float globally across portfolio sections.
+
+For future projects:
+
+1. Store the web-optimized video at `public/media/<project-slug>.mp4`.
+2. Compress large source videos before committing them so the portfolio stays lightweight.
+3. Render the video player only inside that project's detail/case-study component.
+4. Do not render project videos on the Overview dashboard, general project list, resume, or unrelated sections.
+5. Prefer `preload="metadata"`, `playsInline`, and muted autoplay when autoplay is desired.
+6. If a source video becomes too large for the repository, move the optimized asset to durable object/CDN storage and keep the same project-scoped rendering pattern.
+
+Current example: `public/media/helios.mp4` is loaded only when HELIOS is opened.
