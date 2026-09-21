@@ -19,7 +19,6 @@ import { GithubProfileWindow } from "@/components/github/github-activity";
 import { CurrentlyLearningWidget } from "@/components/goals/currently-learning-widget";
 import { CommandPalette, type PortfolioSection } from "@/components/portfolio/command-palette";
 import { TerminalEasterEgg } from "@/components/portfolio/terminal-easter-egg";
-import { HeliosVideoWindow } from "@/components/media/helios-video-window";
 
 type Section = PortfolioSection;
 
@@ -103,11 +102,11 @@ function About() {
 }
 
 function Projects({ onNavigate }: { onNavigate: (section: Section) => void }) {
-  return <div className="dash-section"><div className="content-heading"><span>02 / WORKSPACE</span><h2>Projects</h2><p>Open a project file to inspect its focus, stack, and next step.</p></div><HeliosVideoWindow label="HELIOS project demo" /><DeferredPanel label="project explorer"><ProjectExplorer onCaseStudy={() => onNavigate("hackathons")} /></DeferredPanel></div>;
+  return <div className="dash-section"><div className="content-heading"><span>02 / WORKSPACE</span><h2>Projects</h2><p>Open a project file to inspect its focus, stack, and next step.</p></div><DeferredPanel label="project explorer"><ProjectExplorer onCaseStudy={() => onNavigate("hackathons")} /></DeferredPanel></div>;
 }
 
 function Hackathons() {
-  return <div className="dash-section hackathons-section"><div className="content-heading"><span>03 / BUILD SPRINTS</span><h2>Hackathons</h2><p>Fast-moving environments where the problem, system design, and product all have to come together.</p></div><HeliosVideoWindow label="HELIOS Smart India Hackathon demo" /><DeferredPanel label="hackathon timeline"><HackathonTimeline /></DeferredPanel></div>;
+  return <div className="dash-section hackathons-section"><div className="content-heading"><span>03 / BUILD SPRINTS</span><h2>Hackathons</h2><p>Fast-moving environments where the problem, system design, and product all have to come together.</p></div><DeferredPanel label="hackathon timeline"><HackathonTimeline /></DeferredPanel></div>;
 }
 
 function GithubPanel() {
