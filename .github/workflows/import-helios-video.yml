@@ -1,0 +1,36 @@
+name: Import HELIOS portfolio video
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import-helios-video.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import-video:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download HELIOS source video
+        run: |
+          curl -L --fail --retry 3             'https://d2jqrm6oza8nb6.cloudfront.net/datasets/6c4daeb9-2b1f-4e7e-818b-0afe6050d824.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMGMzYjdiNDEyMzdhNTMxZSIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDE0NjM2OX0.oTBk_CzNia0ASvKGtRpnOV9TAw0eLqrI7YzOPG4SLyY'             -o /tmp/helios-source.mp4
+
+      - name: Create web-optimized portfolio video
+        run: |
+          mkdir -p public/media
+          ffmpeg -y -i /tmp/helios-source.mp4             -vf "scale=-2:360"             -c:v libx264 -preset medium -b:v 500k -maxrate 700k -bufsize 1400k             -c:a aac -b:a 64k             -movflags +faststart             public/media/helios.mp4
+
+      - name: Commit video asset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/media/helios.mp4
+          git commit -m "Add HELIOS portfolio video"
+          git push origin main
