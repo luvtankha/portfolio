@@ -958,3 +958,19 @@ body { min-height: 100vh; overflow-x: hidden; }
     transition: none;
   }
 }
+
+/* Keep project videos embedded in the project that owns them. */
+.project-helios-video,
+.case-study-video {
+  width: 100%;
+  margin: 24px 0;
+}
+.project-helios-video .helios-video-window,
+.case-study-video .helios-video-window {
+  width: min(620px, 100%);
+  margin: 0;
+}
+.helios-public-page > .helios-video-window {
+  width: min(680px, 100%);
+  margin: 26px 0 38px;
+}
