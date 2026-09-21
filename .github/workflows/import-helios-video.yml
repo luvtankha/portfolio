@@ -22,6 +22,11 @@ jobs:
         run: |
           curl -L --fail --retry 3             'https://d2jqrm6oza8nb6.cloudfront.net/datasets/6c4daeb9-2b1f-4e7e-818b-0afe6050d824.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMGMzYjdiNDEyMzdhNTMxZSIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDE0NjM2OX0.oTBk_CzNia0ASvKGtRpnOV9TAw0eLqrI7YzOPG4SLyY'             -o /tmp/helios-source.mp4
 
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
       - name: Create web-optimized portfolio video
         run: |
           mkdir -p public/media
