@@ -762,3 +762,196 @@ body { min-height: 100vh; overflow-x: hidden; }
   .public-project-list article { grid-template-columns: 1fr; gap: 9px; }
   .public-project-list a, .public-muted { justify-self: start; }
 }
+
+
+/* HELIOS floating demo window */
+.helios-video-window {
+  position: relative;
+  z-index: 18;
+  width: min(360px, 100%);
+  margin: -6px 0 24px auto;
+  overflow: hidden;
+  border: 1px solid #3b314a;
+  border-radius: 14px;
+  background: #101014;
+  box-shadow: 0 18px 48px rgba(0,0,0,.32), 0 0 0 1px rgba(139,92,246,.04);
+  transition: width .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.helios-video-window:hover {
+  border-color: #5b477b;
+  box-shadow: 0 22px 56px rgba(0,0,0,.4), 0 0 28px rgba(139,92,246,.08);
+}
+.helios-video-window.is-minimized {
+  width: min(300px, 100%);
+}
+.helios-video-window.is-maximized {
+  position: fixed;
+  inset: 5vh 5vw;
+  z-index: 500;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border-color: #7057a0;
+  box-shadow: 0 0 0 100vmax rgba(0,0,0,.78), 0 28px 90px rgba(0,0,0,.7);
+}
+.helios-video-titlebar {
+  min-height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 9px 0 12px;
+  border-bottom: 1px solid #292930;
+  background: linear-gradient(90deg, rgba(139,92,246,.08), transparent 45%), #1b1b20;
+}
+.helios-video-titlebar > div:first-child {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.helios-video-titlebar > div:first-child > i {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  box-shadow: 0 0 9px rgba(139,92,246,.75);
+}
+.helios-video-titlebar span {
+  overflow: hidden;
+  color: #d4d4d8;
+  font: 11px var(--font-mono, monospace);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.helios-video-titlebar small {
+  padding: 3px 5px;
+  border: 1px solid #3b3150;
+  border-radius: 5px;
+  color: #a78bfa;
+  background: rgba(139,92,246,.08);
+  font: 8px var(--font-mono, monospace);
+  letter-spacing: .08em;
+}
+.helios-video-window-actions,
+.helios-video-controls {
+  display: flex;
+  align-items: center;
+}
+.helios-video-window-actions {
+  gap: 4px;
+}
+.helios-video-window-actions button,
+.helios-video-controls button {
+  border: 1px solid transparent;
+  color: #a1a1aa;
+  background: transparent;
+  cursor: pointer;
+  transition: .15s ease;
+}
+.helios-video-window-actions button {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 6px;
+}
+.helios-video-window-actions button:hover,
+.helios-video-window-actions button:focus-visible,
+.helios-video-controls button:hover,
+.helios-video-controls button:focus-visible {
+  border-color: #4d3d67;
+  outline: 0;
+  color: #f4f4f5;
+  background: rgba(139,92,246,.12);
+}
+.helios-video-stage {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #050506;
+}
+.helios-video-stage video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #050506;
+}
+.helios-video-window.is-maximized .helios-video-stage {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+.helios-video-controls {
+  min-height: 42px;
+  gap: 7px;
+  padding: 6px 9px;
+  border-top: 1px solid #25252b;
+  background: #151518;
+}
+.helios-video-controls button {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 28px;
+  padding: 0;
+  border-radius: 6px;
+}
+.helios-video-control-separator {
+  width: 1px;
+  height: 17px;
+  margin: 0 1px;
+  background: #313139;
+}
+.helios-volume-meter {
+  width: 58px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #303038;
+}
+.helios-volume-meter > span {
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: #a78bfa;
+  transition: width .15s ease;
+}
+.helios-video-controls > small {
+  margin-left: auto;
+  color: #71717a;
+  font: 8px var(--font-mono, monospace);
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .helios-video-window {
+    width: 100%;
+    margin: 0 0 22px;
+  }
+  .helios-video-window.is-minimized {
+    width: 100%;
+  }
+  .helios-video-window.is-maximized {
+    inset: 10px;
+  }
+  .helios-volume-meter {
+    width: 44px;
+  }
+  .helios-video-controls > small {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .helios-video-window,
+  .helios-volume-meter > span {
+    transition: none;
+  }
+}
