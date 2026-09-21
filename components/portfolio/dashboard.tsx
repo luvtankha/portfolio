@@ -76,13 +76,6 @@ function Overview({ onNavigate, draggable = true }: { onNavigate: (section: Sect
       </section>
       <div className="overview-utility-grid">
         <GithubProfileWindow compact draggable={draggable} />
-        <CurrentlyLearningWidget />
-      </div>
-      <button className="featured-helios-card" type="button" onClick={() => onNavigate("hackathons")}>
-        <div><span>FEATURED HACKATHON PROJECT</span><h2>HELIOS</h2><p>Healthcare Enabled Language &amp; Intelligent Observation System</p></div><i>View Case Study <ArrowUpRight size={16} /></i>
-      </button>
-      <button className="overview-roadmap-preview" type="button" onClick={() => onNavigate("goals")}><span>ROADMAP</span><strong>Full Stack <i>→</i> AI Engineering</strong><small>Open career direction <ArrowUpRight size={14} /></small></button>
-      <div className="social-window-grid overview-linkedin-window">
         <motion.section className="profile-window linkedin-profile-window" drag={draggable && !reduceMotion ? "x" : false} dragControls={linkedInDragControls} dragListener={false} dragConstraints={{ left: -10, right: 10 }} dragElastic={.08} dragSnapToOrigin whileHover={reduceMotion ? undefined : { y: -3 }}>
           <div className={`os-window-bar ${draggable ? "draggable-window-bar" : ""}`} onPointerDown={(event) => draggable && !reduceMotion && linkedInDragControls.start(event)}><span>linkedin.com/in/luv-tankha-aa9532324</span><div><i /><i /><i /></div></div>
           <div className="profile-window-body">
@@ -93,6 +86,13 @@ function Overview({ onNavigate, draggable = true }: { onNavigate: (section: Sect
             <a className="profile-open-link" href="https://www.linkedin.com/in/luv-tankha-aa9532324" target="_blank" rel="noopener noreferrer">View LinkedIn <ArrowUpRight size={15} /></a>
           </div>
         </motion.section>
+      </div>
+      <button className="featured-helios-card" type="button" onClick={() => onNavigate("hackathons")}>
+        <div><span>FEATURED HACKATHON PROJECT</span><h2>HELIOS</h2><p>Healthcare Enabled Language &amp; Intelligent Observation System</p></div><i>View Case Study <ArrowUpRight size={16} /></i>
+      </button>
+      <button className="overview-roadmap-preview" type="button" onClick={() => onNavigate("goals")}><span>ROADMAP</span><strong>Full Stack <i>→</i> AI Engineering</strong><small>Open career direction <ArrowUpRight size={14} /></small></button>
+      <div className="overview-learning-window">
+        <CurrentlyLearningWidget />
       </div>
     </div>
   );
