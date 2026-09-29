@@ -80,14 +80,14 @@ function Overview({ onNavigate, draggable = true }: { onNavigate: (section: Sect
           <div className="profile-window-body">
             <div className="linkedin-brand"><span><Network size={22} /></span><small>PROFILE PREVIEW</small></div>
             <h3>Luv Tankha</h3><p className="linkedin-handle">Full-Stack Developer</p><p className="linkedin-direction">Aspiring AI Engineer · B.Tech Data Science, MUIT</p>
-            <p className="linkedin-about">Team Leader & Tech Lead for HELIOS at Smart India Hackathon 2026. Building practical software while progressing toward AI engineering.</p>
+            <p className="linkedin-about">Building CAPTAIN for the Smart India Hackathon 2026 Final Round under SIH26171, alongside full-stack and AI engineering projects.</p>
             <div className="linkedin-sections"><button onClick={() => onNavigate("hackathons")}><Trophy size={15} /> Hackathons</button><button onClick={() => onNavigate("projects")}><BriefcaseBusiness size={15} /> Projects</button><button onClick={() => onNavigate("about")}><Code2 size={15} /> Skills</button></div>
             <a className="profile-open-link" href="https://www.linkedin.com/in/luv-tankha-aa9532324" target="_blank" rel="noopener noreferrer">View LinkedIn <ArrowUpRight size={15} /></a>
           </div>
         </motion.section>
       </div>
       <button className="featured-helios-card" type="button" onClick={() => onNavigate("hackathons")}>
-        <div><span>FEATURED HACKATHON PROJECT</span><h2>HELIOS</h2><p>Healthcare Enabled Language &amp; Intelligent Observation System</p></div><i>View Case Study <ArrowUpRight size={16} /></i>
+        <div><span>FEATURED HACKATHON PROJECT</span><h2>CAPTAIN</h2><p>Privacy-First Browser Agent · SIH26171 · Final Round</p></div><i>View Case Study <ArrowUpRight size={16} /></i>
       </button>
       <button className="overview-roadmap-preview" type="button" onClick={() => onNavigate("goals")}><span>ROADMAP</span><strong>Full Stack <i>→</i> AI Engineering</strong><small>Open career direction <ArrowUpRight size={14} /></small></button>
       <div className="overview-learning-window">
