@@ -10,6 +10,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "captain",
+    title: "CAPTAIN",
+    description: "Privacy-first browser agent for SIH26171 with on-device perception, PII redaction, consent gates, and validated browser actions.",
+    stack: ["Manifest V3", "JavaScript", "TypeScript", "Node.js", "Tesseract.js", "ONNX Runtime Web"],
+    status: "building",
+    accent: "green",
+    href: "https://github.com/luvtankha/captain",
+  },
+  {
     slug: "helios",
     title: "HELIOS",
     description: "Healthcare pre-consultation system that turns patient waiting time into structured clinical context.",
