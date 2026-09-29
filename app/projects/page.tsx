@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 
 const projects = [
+  { title: "CAPTAIN", category: "Browser Agents · AI · Privacy", description: "Privacy-first browser agent for SIH26171 with on-device perception and protected browser automation.", href: "/projects/captain", stack: "Manifest V3 · JavaScript · TypeScript · Node.js · Tesseract.js · ONNX Runtime Web" },
   { title: "HELIOS", category: "Healthcare · AI · Full Stack", description: "Turn patient waiting time into clinical intelligence.", href: "/projects/helios", stack: "Next.js · TypeScript · Express · PostgreSQL · Prisma · Whisper" },
   { title: "Personal Developer Portfolio", category: "Product · Web", description: "An interactive Obsidian-inspired engineering dashboard for projects, hackathons, GitHub activity, learning goals, and career direction.", href: "https://github.com/luvtankha/portfolio", stack: "Next.js · TypeScript · Tailwind CSS · Framer Motion", external: true },
 ];
